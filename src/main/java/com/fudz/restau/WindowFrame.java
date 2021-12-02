@@ -1,5 +1,7 @@
 package com.fudz.restau;
 
+import com.fudz.custom.FudzFrame;
+import com.fudz.custom.FudzToolbar;
 import com.fudz.fragments.CookingInProgFragment;
 import com.fudz.fragments.OrdersFragmentPanel;
 import java.awt.Color;
@@ -9,7 +11,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,11 +19,10 @@ import javax.swing.JPanel;
  *
  * @author Fudz Restaurant
  */
-public class WindowFrame extends javax.swing.JFrame {
+public class WindowFrame extends FudzFrame {
     
     private Color menuLabelColor = new Color(183,138,0);
     
-    private int cursorState = Fudz.DEFAULT_STATE;
     private int lastWindowState = -1;
     
     private Database.Server DB;
@@ -32,6 +32,11 @@ public class WindowFrame extends javax.swing.JFrame {
     
     private int ordersFragmentPanelWidth = 0;
     private int ordersFragmentPanelHeight = 0;
+    
+    private FudzMouseListener fudzFrameMouseListener;
+    private FudzToolbar.FudzToolbarMouseListener fudzToolbarMouseListener;
+    
+    public static boolean[] isResizingWindowOnDrag = {false, false};
 
     /**
      * Creates new form NewJFrame
@@ -39,7 +44,7 @@ public class WindowFrame extends javax.swing.JFrame {
     public WindowFrame() {
         initComponents();
         /*
-        * This will resize the window frame according to the device's screen sizes
+        * This will resize the window frame to the device's screen sizes - 300
         * and will center the frame.
         */
         int newScreenWidth = (int)(Fudz.getScreenWidth() - 300);
@@ -49,12 +54,44 @@ public class WindowFrame extends javax.swing.JFrame {
         this.setBounds(300/2, ((int)Fudz.getScreenHeight()-newScreenHeight)/2, newScreenWidth, newScreenHeight);
         
         new UpdateFragmentsThread().start();
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        /* * * * * * * * * *
+        * MOUSE LISTENERS
+        * * * * * * * * * */
+        // FRAME MOUSE LISTENER
+        fudzFrameMouseListener = new FudzMouseListener() {
+            @Override
+            public void onPressed() {
+                JPanel fragment = (JPanel)contentPanel.getComponent(0);
+                columnPHolder = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
+            }
+
+            @Override
+            public void onDragged() {
+                // ** updates the fragments column every drag ** \\
+                JPanel fragment = (JPanel)contentPanel.getComponent(0);
+                final int column = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
+                if (column != columnPHolder) {
+                    pHolderCount = 0;
+                    _updateScreen(viewedScrn);
+                }
+                // = = = = = = = = = = = = = = \\
+            }
+        };
+        
+        // TOOLBAR MOUSE LISTENER
+        fudzToolbarMouseListener = (int frameX, int frameY) -> {
+            // onDragged
+            WindowFrame.this.setLocation(frameX, frameY);
+        };
+        
+        // set the listeners
+        this.setFudzMouseListener(fudzFrameMouseListener);
+        fudzToolbar.setFudzToolbarMouseListener(fudzToolbarMouseListener);
         
         //Firebase.initialize();
         //DB = new Database.Server(mReference);
     }
-    
-    private boolean hasPHolder = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,10 +121,6 @@ public class WindowFrame extends javax.swing.JFrame {
         itemNameLbl = new javax.swing.JLabel();
         itemQtyLbl = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
-        toolbarPanel = new javax.swing.JPanel();
-        minimizeBtn = new javax.swing.JLabel();
-        closeWindowBtn = new javax.swing.JLabel();
-        maximizeBtn = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         logoOnMenu = new javax.swing.JLabel();
         ordersPanel = new javax.swing.JPanel();
@@ -103,6 +136,10 @@ public class WindowFrame extends javax.swing.JFrame {
         headingLbl = new javax.swing.JLabel();
         contentsScrollPane = new javax.swing.JScrollPane();
         contentPanel = new javax.swing.JPanel();
+        fudzToolbar = new com.fudz.custom.FudzToolbar(this);
+        closeWindowBtn = new javax.swing.JLabel();
+        maximizeBtn = new javax.swing.JLabel();
+        minimizeBtn = new javax.swing.JLabel();
 
         ordersFragment.setBackground(new java.awt.Color(252, 243, 236));
         ordersFragment.setAutoscrolls(true);
@@ -294,22 +331,6 @@ public class WindowFrame extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(335, 0));
         setUndecorated(true);
         setSize(new java.awt.Dimension(938, 490));
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                formMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                formMouseMoved(evt);
-            }
-        });
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                formMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                formMouseReleased(evt);
-            }
-        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowDeiconified(java.awt.event.WindowEvent evt) {
                 formWindowDeiconified(evt);
@@ -318,83 +339,6 @@ public class WindowFrame extends javax.swing.JFrame {
 
         mainPanel.setBackground(new java.awt.Color(251, 211, 87));
         mainPanel.setPreferredSize(new java.awt.Dimension(1351, 700));
-
-        toolbarPanel.setBackground(new java.awt.Color(218, 164, 0));
-        toolbarPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                toolbarPanelMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                toolbarPanelMouseMoved(evt);
-            }
-        });
-        toolbarPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                toolbarPanelMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                toolbarPanelMouseReleased(evt);
-            }
-        });
-
-        minimizeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/minimize_window_25px.png"))); // NOI18N
-        minimizeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                minimizeBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                minimizeBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                minimizeBtnMouseExited(evt);
-            }
-        });
-
-        closeWindowBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close_window_25px.png"))); // NOI18N
-        closeWindowBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                closeWindowBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                closeWindowBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                closeWindowBtnMouseExited(evt);
-            }
-        });
-
-        maximizeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/full_screen_25px.png"))); // NOI18N
-        maximizeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                maximizeBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                maximizeBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                maximizeBtnMouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout toolbarPanelLayout = new javax.swing.GroupLayout(toolbarPanel);
-        toolbarPanel.setLayout(toolbarPanelLayout);
-        toolbarPanelLayout.setHorizontalGroup(
-            toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(minimizeBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(maximizeBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(closeWindowBtn)
-                .addGap(12, 12, 12))
-        );
-        toolbarPanelLayout.setVerticalGroup(
-            toolbarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(minimizeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-            .addComponent(maximizeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(closeWindowBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         menuPanel.setBackground(new java.awt.Color(252, 243, 236));
         menuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(218, 164, 0)));
@@ -575,6 +519,67 @@ public class WindowFrame extends javax.swing.JFrame {
         contentPanel.setLayout(new java.awt.GridLayout(3, 2, 10, 20));
         contentsScrollPane.setViewportView(contentPanel);
 
+        fudzToolbar.setBackground(new java.awt.Color(218, 164, 0));
+
+        closeWindowBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close_window_25px.png"))); // NOI18N
+        closeWindowBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeWindowBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                closeWindowBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                closeWindowBtnMouseExited(evt);
+            }
+        });
+
+        maximizeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/full_screen_25px.png"))); // NOI18N
+        maximizeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maximizeBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                maximizeBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                maximizeBtnMouseExited(evt);
+            }
+        });
+
+        minimizeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/minimize_window_25px.png"))); // NOI18N
+        minimizeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizeBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                minimizeBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                minimizeBtnMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout fudzToolbarLayout = new javax.swing.GroupLayout(fudzToolbar);
+        fudzToolbar.setLayout(fudzToolbarLayout);
+        fudzToolbarLayout.setHorizontalGroup(
+            fudzToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fudzToolbarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(minimizeBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(maximizeBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(closeWindowBtn)
+                .addContainerGap())
+        );
+        fudzToolbarLayout.setVerticalGroup(
+            fudzToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(closeWindowBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(maximizeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(minimizeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -587,21 +592,21 @@ public class WindowFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(contentsScrollPane)
                         .addGap(19, 19, 19))))
-            .addComponent(toolbarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fudzToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addComponent(toolbarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fudzToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(headingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(49, 49, 49)
                         .addComponent(contentsScrollPane)
-                        .addGap(25, 25, 25))
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -692,74 +697,9 @@ public class WindowFrame extends javax.swing.JFrame {
             _maximizeFrame();
     }//GEN-LAST:event_formWindowDeiconified
 
-    private int xx, yy;
-    private void toolbarPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toolbarPanelMousePressed
-        xx = evt.getX();
-        yy = evt.getY();
-        rightBoundXOnScrn = this.getX() + this.getWidth();
-        bottomBoundYOnScrn = this.getY() + this.getHeight();
-        
-        //JPanel fragment = (JPanel)contentPanel.getComponent(0);
-        //columnPHolder = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
-    }//GEN-LAST:event_toolbarPanelMousePressed
-
-    public static boolean[] isResizingWindowOnDrag = {false, false};
-    private void toolbarPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toolbarPanelMouseDragged
-        int cursorOnScrnX = evt.getXOnScreen();
-        int cursorOnScrnY = evt.getYOnScreen();
-        
-        // resize the window if the cursor's location is on certain bounds
-        _resizeWindow(evt);
-        
-        if (isResizingWindowOnDrag[0]) {
-            _recorrectWindowFrame();
-            isResizingWindowOnDrag[0] = false;
-            return;
-        }
-        
-        this.setLocation(cursorOnScrnX-xx, cursorOnScrnY-yy);
-    }//GEN-LAST:event_toolbarPanelMouseDragged
-
-    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        _detectBounds(evt);
-    }//GEN-LAST:event_formMouseMoved
-
-    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        isResizingWindowOnDrag[0] = false;
-        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        _recorrectWindowFrame();
-    }//GEN-LAST:event_formMouseReleased
-
-    private void toolbarPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toolbarPanelMouseMoved
-        _detectBounds(evt);
-    }//GEN-LAST:event_toolbarPanelMouseMoved
     
-    /*
-    * Listens for mouse dragged and resize the form when dragged depending
-    * of the cursor's state.
-    */
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         
-        _resizeWindow(evt);
-        _recorrectWindowFrame();
-    }//GEN-LAST:event_formMouseDragged
-
-    private void toolbarPanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toolbarPanelMouseReleased
-        this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        if (isResizingWindowOnDrag[0])
-            _recorrectWindowFrame();
-        isResizingWindowOnDrag[1] = false;
-    }//GEN-LAST:event_toolbarPanelMouseReleased
-
-    public static int rightBoundXOnScrn, bottomBoundYOnScrn;
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        rightBoundXOnScrn = this.getX() + this.getWidth();
-        bottomBoundYOnScrn = this.getY() + this.getHeight();
-        
-        JPanel fragment = (JPanel)contentPanel.getComponent(0);
-        columnPHolder = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
-    }//GEN-LAST:event_formMousePressed
-
+    
     private void cookingPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cookingPanelMouseEntered
         if (isResizingWindowOnDrag[0])
             return;
@@ -903,233 +843,6 @@ public class WindowFrame extends javax.swing.JFrame {
     }
     
     private int columnPHolder = 0;
-    private void _resizeWindow(java.awt.event.MouseEvent evt) {
-        final int cursorX = evt.getX();
-        final int cursorY = evt.getY();
-        final int windowWidth = this.getWidth();
-        final int windowHeight = this.getHeight();
-        
-        int newWidth=0, newHeight=0;
-        
-        switch (cursorState) {
-            // resize from right bound
-            case Fudz.RIGHT_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                newWidth = (int)(windowWidth * (cursorX / (float)windowWidth));
-                this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, newWidth, this.getHeight()));
-                break;
-            // resize from left bound
-            case Fudz.LEFT_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                if (cursorX < 0) {
-                    final int x = evt.getXOnScreen();
-                    newWidth = (int)(windowWidth * (Math.abs(cursorX*1.05f-windowWidth) / (float)windowWidth));
-                    this.setBounds(new Rectangle(x-0, this.getBounds().y, newWidth, this.getHeight()));
-                }
-                
-                if (cursorX > 0 && windowWidth != this.getMinimumSize().width) {
-                    final int x = evt.getXOnScreen();
-                    newWidth = (int)(windowWidth * (Math.abs(cursorX-windowWidth) / (float)windowWidth));
-                    this.setBounds(new Rectangle(x-0, this.getBounds().y, newWidth, this.getHeight()));
-                }
-                break;
-            // resize from bottom bound
-            case Fudz.BOTTOM_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                newHeight = (int)(windowHeight * (cursorY / (float)windowHeight));
-                this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, this.getWidth(), newHeight));
-                break;
-            // resize from top bound
-            case Fudz.TOP_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                if (cursorY < 0) {
-                    final int y = evt.getYOnScreen();
-                    newHeight = (int)(windowHeight * (Math.abs(cursorY*1.05f-windowHeight) / (float)windowHeight));
-                    this.setBounds(new Rectangle(this.getBounds().x, y-0, windowWidth, newHeight));
-                }
-                
-                if (cursorY > 0 && windowHeight != this.getMinimumSize().height) {
-                    final int y = evt.getYOnScreen();
-                    newHeight = (int)(windowHeight * (Math.abs(cursorY-windowHeight) / (float)windowHeight));
-                    this.setBounds(new Rectangle(this.getBounds().x, y-0, windowWidth, newHeight));
-                }
-                break;
-            case Fudz.BOTTOMRIGHT_RESIZE_STATE:
-                newWidth = (int)(windowWidth * (cursorX / (float)windowWidth));
-                newHeight = (int)(windowHeight * (cursorY / (float)windowHeight));
-                this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, newWidth, newHeight));
-                break;
-            case Fudz.BOTTOMLEFT_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                if (cursorX < 0) {
-                    int x = evt.getXOnScreen();
-                    newWidth = (int)(windowWidth * (Math.abs(cursorX*1.05f-windowWidth) / (float)windowWidth));
-                    newHeight = (int)(windowHeight * (cursorY / (float)windowHeight));
-                    this.setBounds(new Rectangle(x-0, this.getBounds().y, newWidth, newHeight));
-                }
-                
-                if (cursorX >= 0) {
-                    int x = evt.getXOnScreen();
-                    
-                    if (windowWidth != this.getMinimumSize().width)
-                        newWidth = (int)(windowWidth * (Math.abs(cursorX-windowWidth) / (float)windowWidth));
-                    
-                    if (windowHeight != this.getMinimumSize().height)
-                        newHeight = (int)(windowHeight * (cursorY / (float)windowHeight));
-                    
-                    this.setBounds(new Rectangle(newWidth==0?this.getBounds().x:x-0, this.getBounds().y, newWidth==0?windowWidth:newWidth, newHeight==0?windowHeight:newHeight));
-                }
-                break;
-            case Fudz.TOPRIGHT_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                isResizingWindowOnDrag[1] = true;
-                if (cursorY < 0) {
-                    final int y = evt.getYOnScreen();
-                    newHeight = (int)(windowHeight * (Math.abs(cursorY*1.05f-windowHeight) / (float)windowHeight));
-                    newWidth = (int)(windowWidth * (cursorX / (float)windowWidth));
-                    this.setBounds(new Rectangle(this.getBounds().x, y-0, newWidth, newHeight));
-                }
-                
-                if (cursorY >= 0) {
-                    final int y = evt.getYOnScreen();
-                    
-                    if (windowHeight != this.getMinimumSize().height)
-                        newHeight = (int)(windowHeight * (Math.abs(cursorY-windowHeight) / (float)windowHeight));
-                    
-                    if (windowWidth != this.getMinimumSize().width)
-                        newWidth = (int)(windowWidth * (cursorX / (float)windowWidth));
-                    
-                    this.setBounds(new Rectangle(this.getBounds().x, newHeight==0?this.getBounds().y:y-0, newWidth==0?windowWidth:newWidth, newHeight==0?windowHeight:newHeight));
-                }
-                
-                break;
-            case Fudz.TOPLEFT_RESIZE_STATE:
-                isResizingWindowOnDrag[0] = true;
-                isResizingWindowOnDrag[1] = true;
-                
-                // left resize
-                if (cursorX < 0) {
-                    final int x = evt.getXOnScreen();
-                    newWidth = (int)(windowWidth * (Math.abs(cursorX*1.02f-windowWidth) / (float)windowWidth));
-                    this.setBounds(new Rectangle(x-0, this.getBounds().y, newWidth, this.getHeight()));
-                }
-                
-                if (cursorX > 0 && windowWidth != this.getMinimumSize().width) {
-                    final int x = evt.getXOnScreen();
-                    newWidth = (int)(windowWidth * (Math.abs(cursorX-windowWidth) / (float)windowWidth));
-                    this.setBounds(new Rectangle(x-0, this.getBounds().y, newWidth, this.getHeight()));
-                }
-                
-                // top resize
-                if (cursorY < 0) {
-                    final int y = evt.getYOnScreen();
-                    newHeight = (int)(windowHeight * (Math.abs(cursorY*1.02f-windowHeight) / (float)windowHeight));
-                    this.setBounds(new Rectangle(this.getBounds().x, y-0, windowWidth, newHeight));
-                    return;
-                }   
-                
-                if (cursorY > 0 && windowHeight != this.getMinimumSize().height) {
-                    final int y = evt.getYOnScreen();
-                    newHeight = (int)(windowHeight * (Math.abs(cursorY-windowHeight) / (float)windowHeight));
-                    this.setBounds(new Rectangle(this.getBounds().x, y-0, windowWidth, newHeight));
-                    return;
-                }
-                break;
-            default:
-                break;
-        }
-        // ** updates the fragments ** \\
-        JPanel fragment = (JPanel)contentPanel.getComponent(0);
-        final int column = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
-        if (column != columnPHolder) {
-            pHolderCount = 0;
-            _updateScreen(viewedScrn);
-        }
-        // = = = = = = = = = = = = = = \\
-    }
-    
-    private void _recorrectWindowFrame() {
-        if (cursorState == Fudz.BOTTOMRIGHT_RESIZE_STATE ||
-            cursorState == Fudz.RIGHT_RESIZE_STATE ||
-            cursorState == Fudz.BOTTOM_RESIZE_STATE)          // dont recorrect the frame height if the resizing is coming from bottom right or right
-            return;
-        
-        if (cursorState != Fudz.TOPRIGHT_RESIZE_STATE) {
-        // rightXOnScrn
-            if (this.getX() + this.getWidth() < rightBoundXOnScrn) {
-                final int numAdd = Math.abs(rightBoundXOnScrn - (this.getX() + this.getWidth()));
-                this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, this.getWidth()+numAdd, this.getHeight()));
-                return;
-            }
-        
-            if (this.getX() + this.getWidth() > rightBoundXOnScrn) {
-                final int deduct = Math.abs(rightBoundXOnScrn - (this.getX() + this.getWidth()));
-                this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, this.getWidth()-deduct, this.getHeight()));
-                return;
-            }
-        }
-        
-        if (cursorState == Fudz.BOTTOMLEFT_RESIZE_STATE) // dont recorrect the frame height if the resizing is coming from bottom left
-            return;
-        
-        // bottomYOnScrn
-        if (this.getY() + this.getHeight() < bottomBoundYOnScrn) {
-            final int numAdd = Math.abs(bottomBoundYOnScrn - (this.getY()+ this.getHeight()));
-            this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, this.getWidth(), this.getHeight()+numAdd));
-            return;
-        }
-        
-        if (this.getY()+ this.getHeight() > bottomBoundYOnScrn) {
-            final int deduct = Math.abs(bottomBoundYOnScrn - (this.getY()+ this.getHeight()));
-            this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, this.getWidth(), this.getHeight()-deduct));
-        }
-    }
-    
-    private void _detectBounds(java.awt.event.MouseEvent evt) {
-        final int cursorX = evt.getX();
-        final int cursorY = evt.getY();
-        final int heightThreshold = 8; // mouse point height threshold
-        final int widthThreshold = 3; // mouse point width threshold
-        final int frameHeight = this.getBounds().height;
-        final int frameWidth = this.getBounds().width;
-        
-         //detects left bound
-        if (cursorX >= 0 && cursorX <= widthThreshold && cursorY < frameHeight-heightThreshold && cursorY > heightThreshold) {
-            cursorState = Fudz.LEFT_RESIZE_STATE;
-            WindowFrame.this.setCursor(new Cursor(Cursor.E_RESIZE_CURSOR));
-        //detects bottomLeft point
-        } else if(cursorX >= 0 && cursorX <= 4 && cursorY >= frameHeight-heightThreshold && cursorY <= frameHeight) {
-            cursorState = Fudz.BOTTOMLEFT_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.SW_RESIZE_CURSOR));
-        //detects right bound
-        } else if(cursorX >= frameWidth - widthThreshold && cursorX <= frameWidth && cursorY < frameHeight-heightThreshold && cursorY > heightThreshold) {
-            cursorState = Fudz.RIGHT_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.E_RESIZE_CURSOR));
-        //detects bottomRight point
-        } else if(cursorX >= frameWidth - widthThreshold && cursorX <= frameWidth && cursorY >= frameHeight-heightThreshold && cursorY <= frameHeight) {
-            cursorState = Fudz.BOTTOMRIGHT_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
-        //detects bottom bound
-        } else if (cursorY >= frameHeight-heightThreshold && cursorY <= frameHeight && cursorX >= widthThreshold) {
-            cursorState = Fudz.BOTTOM_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.N_RESIZE_CURSOR));
-        //detects top right point
-        } else if(cursorX >= frameWidth - widthThreshold && cursorX <= frameWidth && cursorY >= 0 && cursorY <= heightThreshold) {
-            cursorState = Fudz.TOPRIGHT_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.NE_RESIZE_CURSOR));
-        //detects top bound
-        } else if(cursorY >= 0 && cursorY <= heightThreshold && cursorX > widthThreshold && cursorX < frameWidth - widthThreshold) {
-            cursorState = Fudz.TOP_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.N_RESIZE_CURSOR));
-        //detects topLeft point
-        } else if(cursorX >= 0 && cursorX <= widthThreshold && cursorY >= 0 && cursorY <= heightThreshold) {
-            cursorState = Fudz.TOPLEFT_RESIZE_STATE;
-            this.setCursor(new Cursor(Cursor.NW_RESIZE_CURSOR));
-        } else {
-            cursorState = Fudz.DEFAULT_STATE;
-            this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-        }
-    }
     
     private void _resetGridLayout(Component comp, int size, int column) {
         int row; float remainder;
@@ -1291,6 +1004,7 @@ public class WindowFrame extends javax.swing.JFrame {
     private javax.swing.JLabel cooking_ic;
     private javax.swing.JLabel customersLbl;
     private javax.swing.JLabel customers_ic;
+    private com.fudz.custom.FudzToolbar fudzToolbar;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel headingLbl;
     private javax.swing.JPanel headingPanel;
@@ -1315,6 +1029,5 @@ public class WindowFrame extends javax.swing.JFrame {
     private javax.swing.JLabel tableNumLbl;
     private javax.swing.JLabel table_ic;
     private javax.swing.JLabel timerLbl;
-    private javax.swing.JPanel toolbarPanel;
     // End of variables declaration//GEN-END:variables
 }
