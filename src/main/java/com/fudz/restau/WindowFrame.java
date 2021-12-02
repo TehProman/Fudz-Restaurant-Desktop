@@ -1089,7 +1089,7 @@ public class WindowFrame extends javax.swing.JFrame {
         final int cursorX = evt.getX();
         final int cursorY = evt.getY();
         final int heightThreshold = 8; // mouse point height threshold
-        final int widthThreshold = 4; // mouse point width threshold
+        final int widthThreshold = 3; // mouse point width threshold
         final int frameHeight = this.getBounds().height;
         final int frameWidth = this.getBounds().width;
         
