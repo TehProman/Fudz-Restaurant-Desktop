@@ -1,18 +1,7 @@
-com/fudz/fragments/OrdersFragmentPanel.java
- com.fudz.fragments.OrdersFragmentPanel
- com.fudz.fragments.OrdersFragmentPanel$1
-com/fudz/custom/FudzJList.java
- com.fudz.custom.FudzJList
-com/fudz/restau/Firebase.java
- com.fudz.restau.Firebase
-com/fudz/restau/Database.java
- com.fudz.restau.Database
- com.fudz.restau.Database$Server
- com.fudz.restau.Database$Server$1
-com/fudz/fragments/OrdersItemFragment.java
- com.fudz.fragments.OrdersItemFragment
 com/fudz/restau/Fudz.java
  com.fudz.restau.Fudz
+com/fudz/restau/Firebase.java
+ com.fudz.restau.Firebase
 com/fudz/restau/WindowFrame.java
  com.fudz.restau.WindowFrame
  com.fudz.restau.WindowFrame$1
@@ -28,5 +17,16 @@ com/fudz/restau/WindowFrame.java
  com.fudz.restau.WindowFrame$8
  com.fudz.restau.WindowFrame$9
  com.fudz.restau.WindowFrame$UpdateFragmentsThread
+com/fudz/fragments/OrdersItemFragment.java
+ com.fudz.fragments.OrdersItemFragment
+com/fudz/fragments/OrdersFragmentPanel.java
+ com.fudz.fragments.OrdersFragmentPanel
+ com.fudz.fragments.OrdersFragmentPanel$1
+com/fudz/custom/FudzJList.java
+ com.fudz.custom.FudzJList
+com/fudz/restau/Database.java
+ com.fudz.restau.Database
+ com.fudz.restau.Database$Server
+ com.fudz.restau.Database$Server$1
 com/fudz/fragments/CookingInProgFragment.java
  com.fudz.fragments.CookingInProgFragment
