@@ -42,6 +42,9 @@ public class WindowFrame extends FudzFrame {
      * Creates new form NewJFrame
      */
     public WindowFrame() {
+        //Firebase.initialize();
+        //DB = new Database.Server(mReference);
+        
         initComponents();
         /*
         * This will resize the window frame to the device's screen sizes - 300
@@ -88,9 +91,6 @@ public class WindowFrame extends FudzFrame {
         // set the listeners
         this.setFudzMouseListener(fudzFrameMouseListener);
         fudzToolbar.setFudzToolbarMouseListener(fudzToolbarMouseListener);
-        
-        //Firebase.initialize();
-        //DB = new Database.Server(mReference);
     }
 
     /**

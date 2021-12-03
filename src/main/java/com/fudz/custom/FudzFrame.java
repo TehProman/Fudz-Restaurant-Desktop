@@ -80,7 +80,10 @@ public class FudzFrame extends JFrame {
             
         };
     }
-    
+    /*
+    * This will detect the bounds of the frame and depending of where the
+    * mouse pointer is located, it will change the cursor image
+    */
     protected void _detectBounds(java.awt.event.MouseEvent evt) {
         final int cursorX = evt.getX();
         final int cursorY = evt.getY();
