@@ -3,6 +3,7 @@ package com.fudz.custom;
 import com.fudz.restau.Fudz;
 import static com.fudz.restau.WindowFrame.isResizingWindowOnDrag;
 import java.awt.Cursor;
+import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,6 +15,10 @@ import javax.swing.JFrame;
  * @author Rene Tajos Jr.
  */
 public class FudzFrame extends JFrame {
+    
+    private static boolean isResizable = true;
+    
+    public static int lastWindowState = -1;
     
     private MouseMotionListener mouseMotionListener;
     private MouseListener mouseListener;
@@ -39,10 +44,21 @@ public class FudzFrame extends JFrame {
         fudzMouseListener = listener;
     }
     
+    public void setResizable(boolean _isResizable) {
+        isResizable = _isResizable;
+    }
+    
+    public static boolean isFrameResizable() {
+        return isResizable;
+    }
+    
     private void _initMouseListeners() {
         mouseListener = new MouseListener() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!isResizable)
+                    return;
+                
                 rightBoundXOnScrn = FudzFrame.this.getX() + FudzFrame.this.getWidth();
                 bottomBoundYOnScrn = FudzFrame.this.getY() + FudzFrame.this.getHeight();
                 fudzMouseListener.onPressed();
@@ -50,6 +66,9 @@ public class FudzFrame extends JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                if (!isResizable)
+                    return;
+                
                 isResizingWindowOnDrag[0] = false;
                 FudzFrame.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 _recorrectWindowFrame();
@@ -68,6 +87,9 @@ public class FudzFrame extends JFrame {
         mouseMotionListener = new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
+                if (!isResizable)
+                    return;
+                
                 _resizeWindow(e);
                 fudzMouseListener.onDragged();
                 _recorrectWindowFrame();
@@ -75,6 +97,9 @@ public class FudzFrame extends JFrame {
 
             @Override
             public void mouseMoved(MouseEvent e) {
+                if (!isResizable)
+                    return;
+                
                 _detectBounds(e);
             }
             
@@ -302,5 +327,12 @@ public class FudzFrame extends JFrame {
             final int deduct = Math.abs(bottomBoundYOnScrn - (this.getY()+ this.getHeight()));
             this.setBounds(new Rectangle(this.getBounds().x, this.getBounds().y, this.getWidth(), this.getHeight()-deduct));
         }
+    }
+    
+    public static void maximizeFrame(FudzFrame _frame) {
+        lastWindowState = Fudz.WINDOW_MAXIMIZE;
+        _frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();  
+        _frame.setMaximizedBounds(env.getMaximumWindowBounds());
     }
 }

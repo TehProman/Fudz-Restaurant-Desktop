@@ -23,8 +23,6 @@ public class WindowFrame extends FudzFrame {
     
     private Color menuLabelColor = new Color(183,138,0);
     
-    private int lastWindowState = -1;
-    
     private Database.Server DB;
     private final String mReference = "Sample";
     
@@ -659,7 +657,7 @@ public class WindowFrame extends FudzFrame {
     private void maximizeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maximizeBtnMouseClicked
         pHolderCount = 0;
         if (this.getExtendedState() != Fudz.WINDOW_MAXIMIZE) {
-            _maximizeFrame();
+            FudzFrame.maximizeFrame(this);
             
             maximizeBtn.setIcon(new ImageIcon(getClass().getResource("/icons/full_screen_25px.png")));
             
@@ -694,11 +692,8 @@ public class WindowFrame extends FudzFrame {
 
     private void formWindowDeiconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeiconified
         if (lastWindowState == Fudz.WINDOW_MAXIMIZE)
-            _maximizeFrame();
+            FudzFrame.maximizeFrame(this);
     }//GEN-LAST:event_formWindowDeiconified
-
-    
-        
     
     private void cookingPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cookingPanelMouseEntered
         if (isResizingWindowOnDrag[0])
@@ -799,14 +794,20 @@ public class WindowFrame extends FudzFrame {
     private void _updateScreen(final int screen) {
         switch (screen) {
             case Fudz.ORDERS_SCREEN:
-                headingPanel.removeAll();
+                headingPanel.setBackground(new Color(252,242,230));
+                headingPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 15));
+                
+                headingLbl.setForeground(new Color(183,138,0));
+                headingLbl.setText("Customer Orders");
+                
                 contentPanel.removeAll();
                 headingPanel.add(headingLbl);
                 _addOrder();
                 headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
                 break;
             case Fudz.COOKING_SCREEN:
-                headingPanel.removeAll();
+                headingLbl.setText("  Preparing Orders");
+                
                 contentPanel.removeAll();
                 
                 _addCooking();
@@ -835,13 +836,6 @@ public class WindowFrame extends FudzFrame {
         }
     }
     
-    private void _maximizeFrame() {
-        lastWindowState = Fudz.WINDOW_MAXIMIZE;
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();  
-        this.setMaximizedBounds(env.getMaximumWindowBounds());
-    }
-    
     private int columnPHolder = 0;
     
     private void _resetGridLayout(Component comp, int size, int column) {
@@ -853,7 +847,7 @@ public class WindowFrame extends FudzFrame {
         ((JPanel)comp).setLayout(new GridLayout(remainder!=0.0?row + 1:row, column, 5, 10));
     }
     
-    private int pHolderCount = 0, columnNum = 0;
+    public static int pHolderCount = 0, columnNum = 0;
     private void _addFragment(final JPanel pContentPanel, JPanel _fragment) {
         final JPanel fragment = _fragment;
         final int column = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
@@ -986,7 +980,8 @@ public class WindowFrame extends FudzFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new WindowFrame().setVisible(true);
+            new LoginFormFrame().setVisible(true);
+            //new WindowFrame().setVisible(true);
         });
     }
 

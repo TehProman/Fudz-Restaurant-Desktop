@@ -65,12 +65,19 @@ public class FudzToolbar extends JPanel {
             public void mousePressed(MouseEvent e) {
                 xx = e.getX();
                 yy = e.getY();
+                
+                if (!FudzFrame.isFrameResizable())
+                    return;
+                
                 rightBoundXOnScrn = windowFrame.getX() + windowFrame.getWidth();
                 bottomBoundYOnScrn = windowFrame.getY() + windowFrame.getHeight();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                if (!FudzFrame.isFrameResizable())
+                    return;
+                
                 windowFrame.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                 if (isResizingWindowOnDrag[0])
                     _recorrectWindowFrame();
@@ -93,13 +100,15 @@ public class FudzToolbar extends JPanel {
                 int cursorOnScrnX = e.getXOnScreen();
                 int cursorOnScrnY = e.getYOnScreen();
 
-                // resize the window if the cursor's location is on certain bounds
-                _resizeWindow(e);
+                if (FudzFrame.isFrameResizable()) {
+                    // resize the window if the cursor's location is on certain bounds
+                    _resizeWindow(e);
 
-                if (isResizingWindowOnDrag[0]) {
-                    _recorrectWindowFrame();
-                    isResizingWindowOnDrag[0] = false;
-                    return;
+                    if (isResizingWindowOnDrag[0]) {
+                        _recorrectWindowFrame();
+                        isResizingWindowOnDrag[0] = false;
+                        return;
+                    }
                 }
                 
                 fudzMouseListener.onDragged(cursorOnScrnX-xx, cursorOnScrnY-yy);
@@ -107,6 +116,9 @@ public class FudzToolbar extends JPanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {
+                if (!FudzFrame.isFrameResizable())
+                    return;
+                
                 _detectBounds(e);
             }
             
