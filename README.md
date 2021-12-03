@@ -1,6 +1,6 @@
 # Fudz-Restaurant (Group 2 Thesis Project)
 ## Log-in Screen Design
-> NOT YET STARTED...
+![alt text](https://i.ibb.co/6PqSPk9/Untitled.png)
 ## Orders - Screen Design
 ![alt text](https://i.ibb.co/z2RgqmW/design1.png)
 ## Cooking - Screen Design
