@@ -3,6 +3,7 @@ package com.fudz.custom;
 import com.fudz.restau.Fudz;
 import static com.fudz.restau.WindowFrame.isResizingWindowOnDrag;
 import java.awt.Cursor;
+import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,12 +33,27 @@ public class FudzToolbar extends JPanel {
     }
     
     public FudzToolbar(FudzFrame frame) {
+        super();
         windowFrame = frame;
         _initMouseListeners();
         
         this.addMouseListener(mouseListener);
         this.addMouseMotionListener(mouseMotionListener);
     }
+    
+    public FudzToolbar(LayoutManager layout, boolean isDoubleBuffered) {
+        super(layout, isDoubleBuffered);
+    }
+
+    public FudzToolbar(LayoutManager layout) {
+        super(layout);
+    }
+    
+    public FudzToolbar(boolean isDoubleBuffered) {
+        super(isDoubleBuffered);
+    }
+    
+    public FudzToolbar() {}
     
     public void setFudzToolbarMouseListener(FudzToolbarMouseListener listener) {
         fudzMouseListener = listener;

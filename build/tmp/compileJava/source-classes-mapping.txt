@@ -2,8 +2,11 @@ com/fudz/restau/Fudz.java
  com.fudz.restau.Fudz
 com/fudz/restau/Firebase.java
  com.fudz.restau.Firebase
-com/fudz/fragments/CookingInProgFragment.java
- com.fudz.fragments.CookingInProgFragment
+com/fudz/custom/FudzFrame.java
+ com.fudz.custom.FudzFrame
+ com.fudz.custom.FudzFrame$1
+ com.fudz.custom.FudzFrame$2
+ com.fudz.custom.FudzFrame$FudzMouseListener
 com/fudz/fragments/OrdersItemFragment.java
  com.fudz.fragments.OrdersItemFragment
 com/fudz/fragments/OrdersFragmentPanel.java
@@ -15,6 +18,8 @@ com/fudz/restau/Database.java
  com.fudz.restau.Database$Server$1
 com/fudz/custom/FudzJList.java
  com.fudz.custom.FudzJList
+com/fudz/fragments/CookingInProgFragment.java
+ com.fudz.fragments.CookingInProgFragment
 com/fudz/custom/FudzToolbar.java
  com.fudz.custom.FudzToolbar
  com.fudz.custom.FudzToolbar$1
@@ -32,8 +37,3 @@ com/fudz/restau/WindowFrame.java
  com.fudz.restau.WindowFrame$8
  com.fudz.restau.WindowFrame$9
  com.fudz.restau.WindowFrame$UpdateFragmentsThread
-com/fudz/custom/FudzFrame.java
- com.fudz.custom.FudzFrame
- com.fudz.custom.FudzFrame$1
- com.fudz.custom.FudzFrame$2
- com.fudz.custom.FudzFrame$FudzMouseListener
