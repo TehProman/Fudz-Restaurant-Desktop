@@ -5,7 +5,7 @@ import java.awt.Color;
 
 /**
  *
- * @author Lenovo
+ * @author Rene Tajos Jr.
  */
 public class CookingFragment extends RoundedPanel {
 
