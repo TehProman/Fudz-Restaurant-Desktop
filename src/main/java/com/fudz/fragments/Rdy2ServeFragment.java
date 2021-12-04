@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.fudz.fragments;
 
 import com.fudz.custom.RoundedPanel;
@@ -87,7 +83,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
         showOrdersLbl.setText("Show Orders");
         showOrdersBtn.add(showOrdersLbl);
 
-        callWaiterBtn.setBackground(new java.awt.Color(221, 179, 24));
+        callWaiterBtn.setBackground(new java.awt.Color(255, 51, 51));
         callWaiterBtn.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
         callWaiterBtn.setCornerRadius(30);
 

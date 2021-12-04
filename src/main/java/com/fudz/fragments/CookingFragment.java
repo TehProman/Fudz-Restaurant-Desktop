@@ -75,7 +75,7 @@ public class CookingFragment extends RoundedPanel {
         showOrdersLbl.setText("Show Orders");
         showOrdersBtn.add(showOrdersLbl);
 
-        finishBtn.setBackground(new java.awt.Color(221, 179, 24));
+        finishBtn.setBackground(new java.awt.Color(255, 51, 51));
         finishBtn.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
         finishBtn.setCornerRadius(30);
 
