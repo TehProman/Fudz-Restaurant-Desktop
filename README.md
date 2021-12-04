@@ -4,6 +4,6 @@
 ## Orders - Screen Design
 ![alt text](https://i.ibb.co/z2RgqmW/design1.png)
 ## Cooking - Screen Design
-![alt text](https://i.ibb.co/DVFdS4v/design2.png)
+![alt text](https://i.ibb.co/pKp08Yg/cooking-design.png)
 ## Ready To Serve - Screen Design
-> IN-PROGRESS... NOT YET STARTED
+![alt text](https://i.ibb.co/pr1DgFg/r2s-design.png)
