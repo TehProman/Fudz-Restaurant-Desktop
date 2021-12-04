@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 public class RoundedPanel extends JPanel {
     
     protected Color bgColor;
+    protected Color borderColor;
     protected int cornerRadius;
     protected boolean haveBorder = true;
 
@@ -27,6 +28,10 @@ public class RoundedPanel extends JPanel {
     
     public void setCornerRadius(int radius) {
         cornerRadius = radius;
+    }
+    
+    public void setBorderColor(Color _borderColor) {
+        borderColor = _borderColor;
     }
 
     @Override
@@ -49,8 +54,8 @@ public class RoundedPanel extends JPanel {
         
         graphics.fillRoundRect(0, 0, width, height, arcs.width, arcs.height); //paint background
         
-        if (haveBorder) {
-            graphics.setColor(new Color(218,164,0)); // set the color for the border
+        if (haveBorder && borderColor != null) {
+            graphics.setColor(borderColor); // set the color for the border
             graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
         }
     }

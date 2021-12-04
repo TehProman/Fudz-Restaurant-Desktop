@@ -1,7 +1,8 @@
 package com.fudz.restau;
 
-import com.fudz.fragments.CookingInProgFragment;
-import com.fudz.fragments.OrdersFragmentPanel;
+import com.fudz.fragments.CookingFragment;
+import com.fudz.fragments.OrdersFragment;
+import com.fudz.fragments.Rdy2ServeFragment;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -64,14 +65,21 @@ public class Fudz {
         switch (viewedScreen) {
             case Fudz.ORDERS_SCREEN:
                 for (int i=0; i<pHolderCount; i++) {
-                    final OrdersFragmentPanel pHolderPanel = new OrdersFragmentPanel();
+                    final OrdersFragment pHolderPanel = new OrdersFragment();
                     pHolderPanel.setVisible(false);
                     root.add(pHolderPanel);
                 }
                 break;
             case Fudz.COOKING_SCREEN:
                 for (int i=0; i<pHolderCount; i++) {
-                    final CookingInProgFragment pHolderPanel = new CookingInProgFragment();
+                    final CookingFragment pHolderPanel = new CookingFragment();
+                    pHolderPanel.setVisible(false);
+                    root.add(pHolderPanel);
+                }
+                break;
+            case Fudz.RTS_SCREEN:
+                for (int i=0; i<pHolderCount; i++) {
+                    final Rdy2ServeFragment pHolderPanel = new Rdy2ServeFragment();
                     pHolderPanel.setVisible(false);
                     root.add(pHolderPanel);
                 }

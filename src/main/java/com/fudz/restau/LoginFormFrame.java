@@ -123,6 +123,7 @@ public class LoginFormFrame extends FudzFrame {
 
         userMainPanel.setBackgroundColor(new java.awt.Color(255, 255, 255));
         userMainPanel.setCornerRadius(30);
+        userMainPanel.setBorderColor(new java.awt.Color(218,164,0));
         userMainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         userIconPanel.setBackground(new java.awt.Color(218, 164, 0));
@@ -157,6 +158,7 @@ public class LoginFormFrame extends FudzFrame {
         userMainPanel.setCornerRadius(30);
         passMainPanel.setBackground(new java.awt.Color(255, 255, 255));
         passMainPanel.setCornerRadius(30);
+        passMainPanel.setBorderColor(new java.awt.Color(218,164,0));
 
         passIconPanel.setBackground(new java.awt.Color(218, 164, 0));
         passIconPanel.setCornerRadius(30);
@@ -380,7 +382,6 @@ public class LoginFormFrame extends FudzFrame {
     private com.fudz.custom.FudzToolbar fudzToolbar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel kitchenLoginLbl;
     private com.fudz.custom.RoundedPanel loginBtn;
     private javax.swing.JPanel loginFormMainPanel;
@@ -391,11 +392,8 @@ public class LoginFormFrame extends FudzFrame {
     private com.fudz.custom.RoundedPanel passMainPanel;
     private javax.swing.JTextField passTxtField;
     private javax.swing.JLabel userIcon;
-    private javax.swing.JLabel userIcon1;
     private com.fudz.custom.RoundedPanel userIconPanel;
-    private com.fudz.custom.RoundedPanel userIconPanel1;
     private com.fudz.custom.RoundedPanel userMainPanel;
-    private com.fudz.custom.RoundedPanel userMainPanel1;
     private javax.swing.JTextField userTxtField;
     // End of variables declaration//GEN-END:variables
 }

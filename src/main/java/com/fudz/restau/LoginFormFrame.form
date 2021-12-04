@@ -190,7 +190,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="userMainPanel.setBackgroundColor(new java.awt.Color(255, 255, 255));&#xa;userMainPanel.setCornerRadius(30);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="userMainPanel.setBackgroundColor(new java.awt.Color(255, 255, 255));&#xa;userMainPanel.setCornerRadius(30);&#xa;userMainPanel.setBorderColor(new java.awt.Color(218,164,0));"/>
               </AuxValues>
 
               <Layout>
@@ -255,7 +255,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passMainPanel.setCornerRadius(30);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="passMainPanel.setCornerRadius(30);&#xa;passMainPanel.setBorderColor(new java.awt.Color(218,164,0));"/>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="userMainPanel.setBackgroundColor(new java.awt.Color(255, 255, 255));&#xa;userMainPanel.setCornerRadius(30);"/>
               </AuxValues>
 

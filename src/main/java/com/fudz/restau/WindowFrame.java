@@ -2,17 +2,16 @@ package com.fudz.restau;
 
 import com.fudz.custom.FudzFrame;
 import com.fudz.custom.FudzToolbar;
-import com.fudz.fragments.CookingInProgFragment;
-import com.fudz.fragments.OrdersFragmentPanel;
+import com.fudz.fragments.CookingFragment;
+import com.fudz.fragments.OrdersFragment;
+import com.fudz.fragments.Rdy2ServeFragment;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -100,24 +99,6 @@ public class WindowFrame extends FudzFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ordersFragment = new javax.swing.JPanel();
-        headerPanel = new javax.swing.JPanel();
-        table_ic = new javax.swing.JLabel();
-        tableNumLbl = new javax.swing.JLabel();
-        customers_ic = new javax.swing.JLabel();
-        customersLbl = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        ordersLstPanel = new javax.swing.JPanel();
-        ordersLst = new javax.swing.JList<>();
-        addOnsPanel = new javax.swing.JPanel();
-        addOnsLbl = new javax.swing.JLabel();
-        addOnsList = new javax.swing.JPanel();
-        cookNowBtn = new javax.swing.JPanel();
-        cookNowLbl = new javax.swing.JLabel();
-        timerLbl = new javax.swing.JLabel();
-        ordersItemFragment = new javax.swing.JPanel();
-        itemNameLbl = new javax.swing.JLabel();
-        itemQtyLbl = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
         logoOnMenu = new javax.swing.JLabel();
@@ -138,190 +119,6 @@ public class WindowFrame extends FudzFrame {
         closeWindowBtn = new javax.swing.JLabel();
         maximizeBtn = new javax.swing.JLabel();
         minimizeBtn = new javax.swing.JLabel();
-
-        ordersFragment.setBackground(new java.awt.Color(252, 243, 236));
-        ordersFragment.setAutoscrolls(true);
-
-        headerPanel.setBackground(new java.awt.Color(252, 243, 236));
-
-        table_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table_ic_25px.png"))); // NOI18N
-
-        tableNumLbl.setFont(new java.awt.Font("Californian FB", 1, 14)); // NOI18N
-        tableNumLbl.setForeground(new java.awt.Color(0, 0, 0));
-        tableNumLbl.setText("Table No.: 12");
-
-        customers_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/customers_ic_25px.png"))); // NOI18N
-
-        customersLbl.setFont(new java.awt.Font("Californian FB", 1, 14)); // NOI18N
-        customersLbl.setForeground(new java.awt.Color(0, 0, 0));
-        customersLbl.setText("Customers: 2");
-
-        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
-        headerPanel.setLayout(headerPanelLayout);
-        headerPanelLayout.setHorizontalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(table_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableNumLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(customers_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customersLbl)
-                .addGap(33, 33, 33))
-        );
-        headerPanelLayout.setVerticalGroup(
-            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(headerPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(customersLbl)
-                    .addComponent(customers_ic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tableNumLbl)
-                    .addComponent(table_ic, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)))
-        );
-
-        jSeparator1.setBackground(new java.awt.Color(195, 168, 67));
-        jSeparator1.setForeground(new java.awt.Color(252, 243, 236));
-
-        ordersLstPanel.setBackground(new Color(0, 0, 0, 0));
-        ordersLstPanel.setLayout(new java.awt.GridLayout(2, 1));
-
-        ordersLst.setBackground(new java.awt.Color(252, 243, 236));
-        ordersLst.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        ordersLst.setFont(new java.awt.Font("Californian FB", 1, 13)); // NOI18N
-        ordersLst.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "  King Burger  x2", "  Pink Spaghetti  x2", "  Chicken Wings  x2", "  Item 4", "  Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        ordersLst.setSelectionBackground(new java.awt.Color(245, 170, 34));
-        ordersLstPanel.add(ordersLst);
-
-        addOnsPanel.setBackground(new java.awt.Color(252, 243, 236));
-        addOnsPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        addOnsPanel.setPreferredSize(addOnsPanel.getPreferredSize());
-
-        addOnsLbl.setFont(new java.awt.Font("Californian FB", 1, 14)); // NOI18N
-        addOnsLbl.setText("Add-ons:");
-
-        javax.swing.GroupLayout addOnsListLayout = new javax.swing.GroupLayout(addOnsList);
-        addOnsList.setLayout(addOnsListLayout);
-        addOnsListLayout.setHorizontalGroup(
-            addOnsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        addOnsListLayout.setVerticalGroup(
-            addOnsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 135, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout addOnsPanelLayout = new javax.swing.GroupLayout(addOnsPanel);
-        addOnsPanel.setLayout(addOnsPanelLayout);
-        addOnsPanelLayout.setHorizontalGroup(
-            addOnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addOnsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addOnsLbl)
-                .addContainerGap(251, Short.MAX_VALUE))
-            .addComponent(addOnsList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        addOnsPanelLayout.setVerticalGroup(
-            addOnsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addOnsPanelLayout.createSequentialGroup()
-                .addComponent(addOnsLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addOnsList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        ordersLstPanel.add(addOnsPanel);
-
-        cookNowBtn.setBackground(new java.awt.Color(255, 51, 51));
-
-        cookNowLbl.setFont(new java.awt.Font("Californian FB", 1, 18)); // NOI18N
-        cookNowLbl.setForeground(new java.awt.Color(255, 255, 255));
-        cookNowLbl.setText("Cook Now");
-
-        javax.swing.GroupLayout cookNowBtnLayout = new javax.swing.GroupLayout(cookNowBtn);
-        cookNowBtn.setLayout(cookNowBtnLayout);
-        cookNowBtnLayout.setHorizontalGroup(
-            cookNowBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cookNowBtnLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cookNowLbl)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        cookNowBtnLayout.setVerticalGroup(
-            cookNowBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cookNowBtnLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(cookNowLbl)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        timerLbl.setText("jLabel1");
-
-        javax.swing.GroupLayout ordersFragmentLayout = new javax.swing.GroupLayout(ordersFragment);
-        ordersFragment.setLayout(ordersFragmentLayout);
-        ordersFragmentLayout.setHorizontalGroup(
-            ordersFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cookNowBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(headerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
-            .addGroup(ordersFragmentLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(timerLbl)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(ordersFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ordersFragmentLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(ordersLstPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        ordersFragmentLayout.setVerticalGroup(
-            ordersFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ordersFragmentLayout.createSequentialGroup()
-                .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(352, 352, 352)
-                .addComponent(timerLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cookNowBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-            .addGroup(ordersFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ordersFragmentLayout.createSequentialGroup()
-                    .addContainerGap(59, Short.MAX_VALUE)
-                    .addComponent(ordersLstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(77, Short.MAX_VALUE)))
-        );
-
-        itemNameLbl.setText("Item Name Here");
-
-        itemQtyLbl.setText("Qty Here");
-
-        javax.swing.GroupLayout ordersItemFragmentLayout = new javax.swing.GroupLayout(ordersItemFragment);
-        ordersItemFragment.setLayout(ordersItemFragmentLayout);
-        ordersItemFragmentLayout.setHorizontalGroup(
-            ordersItemFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ordersItemFragmentLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(itemNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(73, 73, 73)
-                .addComponent(itemQtyLbl)
-                .addGap(43, 43, 43))
-        );
-        ordersItemFragmentLayout.setVerticalGroup(
-            ordersItemFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ordersItemFragmentLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(ordersItemFragmentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemNameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(itemQtyLbl))
-                .addGap(8, 8, 8))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fudz Restaurant");
@@ -602,9 +399,9 @@ public class WindowFrame extends FudzFrame {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(headingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
+                        .addGap(18, 18, 18)
                         .addComponent(contentsScrollPane)
-                        .addGap(37, 37, 37))))
+                        .addGap(18, 18, 18))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -785,6 +582,7 @@ public class WindowFrame extends FudzFrame {
         rdy2ServeLbl.setForeground(Color.WHITE);
         _unHighlightMenuTab(); // unhighlight the previous menu tab.
         viewedScrn = Fudz.RTS_SCREEN; // set the viewed screen to orders screen.
+        _updateScreen(viewedScrn);
     }//GEN-LAST:event_ready2ServePanelMouseClicked
 
     /* * * * * * * * *
@@ -806,7 +604,7 @@ public class WindowFrame extends FudzFrame {
                 headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
                 break;
             case Fudz.COOKING_SCREEN:
-                headingLbl.setText("  Preparing Orders");
+                headingLbl.setText("Preparing Orders");
                 
                 contentPanel.removeAll();
                 
@@ -814,6 +612,13 @@ public class WindowFrame extends FudzFrame {
                 headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
                 break;
             case Fudz.RTS_SCREEN:
+                headingLbl.setText("Orders Ready");
+                
+                contentPanel.removeAll();
+                
+                _addReady2Serve();
+                headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
+
                 break;
         }
     }
@@ -867,6 +672,8 @@ public class WindowFrame extends FudzFrame {
             // when the screen is on COOKING
         } else if (viewedScrn == Fudz.COOKING_SCREEN) {
             _initFragments(fragment, childrensCount, column);
+        } else {
+            _initFragments(fragment, childrensCount, column);
         }
     }
     
@@ -909,27 +716,39 @@ public class WindowFrame extends FudzFrame {
     * THIS METHOD IS FOR TESTING AND TO BE REMOVED LATER.
     */
     private void _addOrder() {
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
-        _addFragment(contentPanel, new OrdersFragmentPanel());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
+        _addFragment(contentPanel, new OrdersFragment());
     }
     
     private void _addCooking() {
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
-        _addFragment(contentPanel, new CookingInProgFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+        _addFragment(contentPanel, new CookingFragment());
+    }
+    
+    private void _addReady2Serve() {
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
+        _addFragment(contentPanel, new Rdy2ServeFragment());
     }
     
     /*
@@ -980,49 +799,30 @@ public class WindowFrame extends FudzFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new LoginFormFrame().setVisible(true);
-            //new WindowFrame().setVisible(true);
+            new WindowFrame().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel addOnsLbl;
-    private javax.swing.JPanel addOnsList;
-    private javax.swing.JPanel addOnsPanel;
     private javax.swing.JLabel closeWindowBtn;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JScrollPane contentsScrollPane;
-    private javax.swing.JPanel cookNowBtn;
-    private javax.swing.JLabel cookNowLbl;
     private javax.swing.JLabel cookingLbl;
     private javax.swing.JPanel cookingPanel;
     private javax.swing.JLabel cooking_ic;
-    private javax.swing.JLabel customersLbl;
-    private javax.swing.JLabel customers_ic;
     private com.fudz.custom.FudzToolbar fudzToolbar;
-    private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel headingLbl;
     private javax.swing.JPanel headingPanel;
-    private javax.swing.JLabel itemNameLbl;
-    private javax.swing.JLabel itemQtyLbl;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel logoOnMenu;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel maximizeBtn;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel minimizeBtn;
-    private javax.swing.JPanel ordersFragment;
-    private javax.swing.JPanel ordersItemFragment;
     private javax.swing.JLabel ordersLbl;
-    private javax.swing.JList<String> ordersLst;
-    private javax.swing.JPanel ordersLstPanel;
     private javax.swing.JPanel ordersPanel;
     private javax.swing.JLabel orders_ic;
     private javax.swing.JLabel rdy2ServeLbl;
     private javax.swing.JPanel ready2ServePanel;
     private javax.swing.JLabel ready_ic;
-    private javax.swing.JLabel tableNumLbl;
-    private javax.swing.JLabel table_ic;
-    private javax.swing.JLabel timerLbl;
     // End of variables declaration//GEN-END:variables
 }
