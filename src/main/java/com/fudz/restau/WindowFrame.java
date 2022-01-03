@@ -101,24 +101,20 @@ public class WindowFrame extends FudzFrame {
 
         mainPanel = new javax.swing.JPanel();
         menuPanel = new javax.swing.JPanel();
-        logoOnMenu = new javax.swing.JLabel();
         ordersPanel = new javax.swing.JPanel();
         orders_ic = new javax.swing.JLabel();
-        ordersLbl = new javax.swing.JLabel();
         cookingPanel = new javax.swing.JPanel();
         cooking_ic = new javax.swing.JLabel();
-        cookingLbl = new javax.swing.JLabel();
         ready2ServePanel = new javax.swing.JPanel();
         ready_ic = new javax.swing.JLabel();
-        rdy2ServeLbl = new javax.swing.JLabel();
-        headingPanel = new javax.swing.JPanel();
-        headingLbl = new javax.swing.JLabel();
         contentsScrollPane = new javax.swing.JScrollPane();
         contentPanel = new javax.swing.JPanel();
         fudzToolbar = new com.fudz.custom.FudzToolbar(this);
         closeWindowBtn = new javax.swing.JLabel();
         maximizeBtn = new javax.swing.JLabel();
         minimizeBtn = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        headingLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fudz Restaurant");
@@ -132,15 +128,13 @@ public class WindowFrame extends FudzFrame {
             }
         });
 
-        mainPanel.setBackground(new java.awt.Color(251, 211, 87));
+        mainPanel.setBackground(new java.awt.Color(252, 243, 236));
         mainPanel.setPreferredSize(new java.awt.Dimension(1351, 700));
 
-        menuPanel.setBackground(new java.awt.Color(252, 243, 236));
-        menuPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(218, 164, 0)));
+        menuPanel.setBackground(new java.awt.Color(218, 164, 0));
+        menuPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(251, 211, 87), java.awt.Color.lightGray));
 
-        logoOnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/200x-logo.png"))); // NOI18N
-
-        ordersPanel.setBackground(new java.awt.Color(218, 164, 0));
+        ordersPanel.setBackground(new java.awt.Color(252, 243, 236));
         ordersPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ordersPanelMouseClicked(evt);
@@ -154,16 +148,11 @@ public class WindowFrame extends FudzFrame {
         });
 
         orders_ic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        orders_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/orders_ic_colored_25px.png"))); // NOI18N
-        orders_ic.setLabelFor(ordersLbl);
+        orders_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/order_yellow_25px.png"))); // NOI18N
         orders_ic.setAlignmentX(0.5F);
         orders_ic.setIconTextGap(2);
         orders_ic.setMaximumSize(new java.awt.Dimension(30, 30));
         orders_ic.setPreferredSize(new java.awt.Dimension(30, 30));
-
-        ordersLbl.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 16)); // NOI18N
-        ordersLbl.setForeground(new java.awt.Color(255, 255, 255));
-        ordersLbl.setText("Orders");
 
         javax.swing.GroupLayout ordersPanelLayout = new javax.swing.GroupLayout(ordersPanel);
         ordersPanel.setLayout(ordersPanelLayout);
@@ -172,21 +161,14 @@ public class WindowFrame extends FudzFrame {
             .addGroup(ordersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(orders_ic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ordersLbl)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         ordersPanelLayout.setVerticalGroup(
             ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ordersPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ordersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(ordersLbl)
-                    .addComponent(orders_ic, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(orders_ic, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        cookingPanel.setBackground(new java.awt.Color(252, 243, 236));
+        cookingPanel.setBackground(new java.awt.Color(218, 164, 0));
         cookingPanel.setPreferredSize(new java.awt.Dimension(232, 42));
         cookingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -200,12 +182,7 @@ public class WindowFrame extends FudzFrame {
             }
         });
 
-        cooking_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cooking_colored_25px.png"))); // NOI18N
-        cooking_ic.setLabelFor(ordersLbl);
-
-        cookingLbl.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 16)); // NOI18N
-        cookingLbl.setForeground(new java.awt.Color(183, 138, 0));
-        cookingLbl.setText("Cooking");
+        cooking_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cooking_white_25px.png"))); // NOI18N
 
         javax.swing.GroupLayout cookingPanelLayout = new javax.swing.GroupLayout(cookingPanel);
         cookingPanel.setLayout(cookingPanelLayout);
@@ -214,21 +191,14 @@ public class WindowFrame extends FudzFrame {
             .addGroup(cookingPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cooking_ic)
-                .addGap(18, 18, 18)
-                .addComponent(cookingLbl)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cookingPanelLayout.setVerticalGroup(
             cookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cookingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(cookingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(cookingLbl)
-                    .addComponent(cooking_ic, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(cooking_ic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
         );
 
-        ready2ServePanel.setBackground(new java.awt.Color(252, 243, 236));
+        ready2ServePanel.setBackground(new java.awt.Color(218, 164, 0));
         ready2ServePanel.setPreferredSize(new java.awt.Dimension(232, 42));
         ready2ServePanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,12 +212,7 @@ public class WindowFrame extends FudzFrame {
             }
         });
 
-        ready_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ready_to_serve_25px.png"))); // NOI18N
-        ready_ic.setLabelFor(ordersLbl);
-
-        rdy2ServeLbl.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 16)); // NOI18N
-        rdy2ServeLbl.setForeground(new java.awt.Color(183, 138, 0));
-        rdy2ServeLbl.setText("Ready to Serve");
+        ready_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/waiter_white_25px.png"))); // NOI18N
 
         javax.swing.GroupLayout ready2ServePanelLayout = new javax.swing.GroupLayout(ready2ServePanel);
         ready2ServePanel.setLayout(ready2ServePanelLayout);
@@ -256,60 +221,37 @@ public class WindowFrame extends FudzFrame {
             .addGroup(ready2ServePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ready_ic)
-                .addGap(18, 18, 18)
-                .addComponent(rdy2ServeLbl)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ready2ServePanelLayout.setVerticalGroup(
             ready2ServePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ready2ServePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ready2ServePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(rdy2ServeLbl)
-                    .addComponent(ready_ic, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(ready_ic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addContainerGap(32, Short.MAX_VALUE)
-                        .addComponent(logoOnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
-                    .addComponent(ready2ServePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(cookingPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addComponent(ordersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11))
+            .addComponent(ordersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ready2ServePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+            .addComponent(cookingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(logoOnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                .addGap(41, 41, 41)
+                .addGap(108, 108, 108)
                 .addComponent(ordersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(cookingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(ready2ServePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
-
-        headingPanel.setBackground(new java.awt.Color(252, 242, 230));
-        headingPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
-
-        headingLbl.setFont(new java.awt.Font("Californian FB", 1, 48)); // NOI18N
-        headingLbl.setForeground(new java.awt.Color(183, 138, 0));
-        headingLbl.setText("Customer Orders");
-        headingPanel.add(headingLbl);
 
         contentsScrollPane.getVerticalScrollBar().setUnitIncrement(16);
         contentsScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        contentPanel.setBackground(new java.awt.Color(251, 211, 87));
+        contentPanel.setBackground(new java.awt.Color(252, 243, 236));
         contentPanel.setForeground(new java.awt.Color(51, 51, 51));
         contentPanel.setLayout(new java.awt.GridLayout(3, 2, 10, 20));
         contentsScrollPane.setViewportView(contentPanel);
@@ -355,64 +297,77 @@ public class WindowFrame extends FudzFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Californian FB", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo25px.png"))); // NOI18N
+        jLabel1.setText("Fudz Restaurant");
+
         javax.swing.GroupLayout fudzToolbarLayout = new javax.swing.GroupLayout(fudzToolbar);
         fudzToolbar.setLayout(fudzToolbarLayout);
         fudzToolbarLayout.setHorizontalGroup(
             fudzToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fudzToolbarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(minimizeBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(maximizeBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeWindowBtn)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         fudzToolbarLayout.setVerticalGroup(
             fudzToolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(closeWindowBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(closeWindowBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
             .addComponent(maximizeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(minimizeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(minimizeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        headingLbl.setFont(new java.awt.Font("Californian FB", 1, 48)); // NOI18N
+        headingLbl.setForeground(new java.awt.Color(183, 138, 0));
+        headingLbl.setText("Customer Orders");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(fudzToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(headingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(headingLbl))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(contentsScrollPane)
-                        .addGap(19, 19, 19))))
-            .addComponent(fudzToolbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(contentsScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 961, Short.MAX_VALUE)))
+                .addGap(21, 21, 21))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(fudzToolbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(headingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
+                        .addComponent(headingLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contentsScrollPane)
-                        .addGap(18, 18, 18))))
+                        .addGap(23, 23, 23))
+                    .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
         );
 
         pack();
@@ -517,9 +472,8 @@ public class WindowFrame extends FudzFrame {
             return;
         
         cookingPanel.setBackground(Fudz.mouseClickedOnMenuTabs_COLOR);
-        cookingLbl.setForeground(Color.WHITE);
-        _unHighlightMenuTab(); // unhighlight the previous menu tab.
         viewedScrn = Fudz.COOKING_SCREEN; // set the viewed screen to cooking screen.
+        _unHighlightMenuTab(); // unhighlight the previous menu tab.
         _updateScreen(Fudz.COOKING_SCREEN);
     }//GEN-LAST:event_cookingPanelMouseClicked
 
@@ -548,9 +502,8 @@ public class WindowFrame extends FudzFrame {
             return;
         
         ordersPanel.setBackground(Fudz.mouseClickedOnMenuTabs_COLOR);
-        ordersLbl.setForeground(Color.WHITE);
-        _unHighlightMenuTab(); // unhighlight the previous menu tab.
         viewedScrn = Fudz.ORDERS_SCREEN; // set the viewed screen to orders screen.
+        _unHighlightMenuTab(); // unhighlight the previous menu tab.
         _updateScreen(Fudz.ORDERS_SCREEN);
     }//GEN-LAST:event_ordersPanelMouseClicked
 
@@ -579,9 +532,8 @@ public class WindowFrame extends FudzFrame {
             return;
         
         ready2ServePanel.setBackground(Fudz.mouseClickedOnMenuTabs_COLOR);
-        rdy2ServeLbl.setForeground(Color.WHITE);
-        _unHighlightMenuTab(); // unhighlight the previous menu tab.
         viewedScrn = Fudz.RTS_SCREEN; // set the viewed screen to orders screen.
+        _unHighlightMenuTab(); // unhighlight the previous menu tab.
         _updateScreen(viewedScrn);
     }//GEN-LAST:event_ready2ServePanelMouseClicked
 
@@ -592,16 +544,12 @@ public class WindowFrame extends FudzFrame {
     private void _updateScreen(final int screen) {
         switch (screen) {
             case Fudz.ORDERS_SCREEN:
-                headingPanel.setBackground(new Color(252,242,230));
-                headingPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 15));
-                
                 headingLbl.setForeground(new Color(183,138,0));
                 headingLbl.setText("Customer Orders");
                 
                 contentPanel.removeAll();
-                headingPanel.add(headingLbl);
                 _addOrder();
-                headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
+                contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
                 break;
             case Fudz.COOKING_SCREEN:
                 headingLbl.setText("Preparing Orders");
@@ -609,7 +557,7 @@ public class WindowFrame extends FudzFrame {
                 contentPanel.removeAll();
                 
                 _addCooking();
-                headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
+                contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
                 break;
             case Fudz.RTS_SCREEN:
                 headingLbl.setText("Orders Ready");
@@ -617,7 +565,7 @@ public class WindowFrame extends FudzFrame {
                 contentPanel.removeAll();
                 
                 _addReady2Serve();
-                headingPanel.updateUI(); contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
+                contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
 
                 break;
         }
@@ -627,16 +575,28 @@ public class WindowFrame extends FudzFrame {
     private void _unHighlightMenuTab() {
         switch (viewedScrn) {
             case Fudz.ORDERS_SCREEN:
-                ordersPanel.setBackground(new Color(252,243,236));
-                ordersLbl.setForeground(menuLabelColor);
+                cookingPanel.setBackground(Fudz.mouseExitedOnMenuTabs_COLOR);
+                ready2ServePanel.setBackground(Fudz.mouseExitedOnMenuTabs_COLOR);
+                
+                orders_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/order_yellow_25px.png")));
+                cooking_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cooking_white_25px.png")));
+                ready_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/waiter_white_25px.png")));
                 break;
             case Fudz.COOKING_SCREEN:
-                cookingPanel.setBackground(new Color(252,243,236));
-                cookingLbl.setForeground(menuLabelColor);
+                ordersPanel.setBackground(Fudz.mouseExitedOnMenuTabs_COLOR);
+                ready2ServePanel.setBackground(Fudz.mouseExitedOnMenuTabs_COLOR);
+                
+                orders_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/order_white_25px.png")));
+                cooking_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cooking_yellow_25px.png")));
+                ready_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/waiter_white_25px.png")));
                 break;
             case Fudz.RTS_SCREEN:
-                ready2ServePanel.setBackground(new Color(252,243,236));
-                rdy2ServeLbl.setForeground(menuLabelColor);
+                ordersPanel.setBackground(Fudz.mouseExitedOnMenuTabs_COLOR);
+                cookingPanel.setBackground(Fudz.mouseExitedOnMenuTabs_COLOR);
+                
+                orders_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/order_white_25px.png")));
+                cooking_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cooking_white_25px.png")));
+                ready_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/waiter_yellow_25px.png")));
                 break;
         }
     }
@@ -807,21 +767,17 @@ public class WindowFrame extends FudzFrame {
     private javax.swing.JLabel closeWindowBtn;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JScrollPane contentsScrollPane;
-    private javax.swing.JLabel cookingLbl;
     private javax.swing.JPanel cookingPanel;
     private javax.swing.JLabel cooking_ic;
     private com.fudz.custom.FudzToolbar fudzToolbar;
     private javax.swing.JLabel headingLbl;
-    private javax.swing.JPanel headingPanel;
-    private javax.swing.JLabel logoOnMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel maximizeBtn;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel minimizeBtn;
-    private javax.swing.JLabel ordersLbl;
     private javax.swing.JPanel ordersPanel;
     private javax.swing.JLabel orders_ic;
-    private javax.swing.JLabel rdy2ServeLbl;
     private javax.swing.JPanel ready2ServePanel;
     private javax.swing.JLabel ready_ic;
     // End of variables declaration//GEN-END:variables

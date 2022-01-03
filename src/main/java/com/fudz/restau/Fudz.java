@@ -37,8 +37,8 @@ public class Fudz {
     public static final int MOUSE_RIGHT_BTN = 3;
     
     public static final Color mouseEnteredOnMenuTabs_COLOR = new Color(255,214,90);
-    public static final Color mouseExitedOnMenuTabs_COLOR = new Color(252,243,236);
-    public static final Color mouseClickedOnMenuTabs_COLOR = new Color(218,164,0);
+    public static final Color mouseExitedOnMenuTabs_COLOR = new Color(218,164,0);
+    public static final Color mouseClickedOnMenuTabs_COLOR = new Color(252,243,236);
     
     public static void log(final Object obj) {
         System.out.println(obj);

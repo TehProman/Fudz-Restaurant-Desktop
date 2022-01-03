@@ -22,14 +22,14 @@ import javax.swing.border.SoftBevelBorder;
 public class OrdersFragment extends javax.swing.JPanel {
     
     private final Font ordersLst_font = new Font("Californian FB", 1, 14);
-    private final Color ordersLst_BgColor = new Color(252,243,236);
+    private final Color ordersLst_BgColor = new Color(255,255,255);
     private final Border ordersLst_Border = new SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
     
     private final Font addOnsLst_font = new Font("Californian FB", 1, 14);
-    private final Color addOnsLst_BgColor = new Color(252,243,236);
+    private final Color addOnsLst_BgColor = new Color(255,255,255);
     private final Border addOnsLst_Border = BorderFactory.createEmptyBorder(1, 1, 1, 1);
     
-    private final Color addOnsPanel_BgColor = new Color(252,243,236);
+    private final Color addOnsPanel_BgColor = new Color(255,255,255);
     private final Border addOnsPanel_Border = new SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
 
     /**
@@ -126,7 +126,7 @@ public class OrdersFragment extends javax.swing.JPanel {
         cookNowLbl = new javax.swing.JLabel();
         timerLbl = new javax.swing.JLabel();
 
-        ordersFragment.setBackground(new java.awt.Color(252, 243, 236));
+        ordersFragment.setBackground(new java.awt.Color(255, 255, 255));
         ordersFragment.setAutoscrolls(true);
         ordersFragment.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -134,7 +134,7 @@ public class OrdersFragment extends javax.swing.JPanel {
             }
         });
 
-        headerPanel.setBackground(new java.awt.Color(252, 243, 236));
+        headerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         table_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table_ic_25px.png"))); // NOI18N
 
@@ -183,7 +183,7 @@ public class OrdersFragment extends javax.swing.JPanel {
         ordersScrollPane.setBorder(null);
         ordersScrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
-        ordersLst.setBackground(new java.awt.Color(252, 243, 236));
+        ordersLst.setBackground(new java.awt.Color(255, 255, 255));
         ordersLst.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout ordersLstLayout = new javax.swing.GroupLayout(ordersLst);
@@ -201,7 +201,7 @@ public class OrdersFragment extends javax.swing.JPanel {
 
         ordersLstPanel.add(ordersScrollPane);
 
-        addOnsPanel.setBackground(new java.awt.Color(252, 243, 236));
+        addOnsPanel.setBackground(new java.awt.Color(255, 255, 255));
         addOnsPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         addOnsPanel.setPreferredSize(addOnsPanel.getPreferredSize());
 
@@ -211,7 +211,7 @@ public class OrdersFragment extends javax.swing.JPanel {
         addOnsScrollPane.getVerticalScrollBar().setUnitIncrement(16);
         addOnsScrollPane.setBorder(null);
 
-        addOnsList.setBackground(new java.awt.Color(252, 243, 236));
+        addOnsList.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout addOnsListLayout = new javax.swing.GroupLayout(addOnsList);
         addOnsList.setLayout(addOnsListLayout);

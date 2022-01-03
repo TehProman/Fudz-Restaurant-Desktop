@@ -13,7 +13,7 @@ public class CookingFragment extends RoundedPanel {
      * Creates new form CookingFragment
      */
     public CookingFragment() {
-        bgColor = new Color(252,243,236);
+        bgColor = new Color(255,255,255);
         cornerRadius = 25;
         haveBorder = false;
         
@@ -40,7 +40,7 @@ public class CookingFragment extends RoundedPanel {
         finishBtn = new com.fudz.custom.RoundedPanel();
         finishLbl = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(252, 243, 236));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLayeredPane1.setLayout(new javax.swing.OverlayLayout(jLayeredPane1));
 

@@ -228,7 +228,7 @@ public class LoginFormFrame extends FudzFrame {
 
         filterPanel.setBackground(new java.awt.Color(135, 101, 0, 127));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Fudz200x200.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/200x-logo.png"))); // NOI18N
 
         javax.swing.GroupLayout filterPanelLayout = new javax.swing.GroupLayout(filterPanel);
         filterPanel.setLayout(filterPanelLayout);
@@ -246,9 +246,9 @@ public class LoginFormFrame extends FudzFrame {
             .addGap(0, 526, Short.MAX_VALUE)
             .addGroup(filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(filterPanelLayout.createSequentialGroup()
-                    .addGap(0, 163, Short.MAX_VALUE)
+                    .addGap(0, 172, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addGap(0, 163, Short.MAX_VALUE)))
+                    .addGap(0, 173, Short.MAX_VALUE)))
         );
 
         bgPane.add(filterPanel);

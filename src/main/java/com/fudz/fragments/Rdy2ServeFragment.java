@@ -13,7 +13,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
      * Creates new form Rdy2ServeFragment
      */
     public Rdy2ServeFragment() {
-        bgColor = new Color(252,243,236);
+        bgColor = new Color(255,255,255);
         cornerRadius = 25;
         haveBorder = false;
         
@@ -40,7 +40,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
         callWaiterBtn = new com.fudz.custom.RoundedPanel();
         callWaiterLbl = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(252, 243, 236));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(192, 279));
         setMinimumSize(new java.awt.Dimension(192, 279));
         setName(""); // NOI18N
@@ -49,7 +49,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
         tableLbl.setForeground(new java.awt.Color(135, 102, 0));
         tableLbl.setText("TABLE");
 
-        iconPanel.setBackground(new java.awt.Color(252, 242, 230));
+        iconPanel.setBackground(new java.awt.Color(255, 255, 255));
         iconPanel.setLayout(new java.awt.GridBagLayout());
 
         numLbl.setBackground(new java.awt.Color(135, 102, 0));
@@ -89,7 +89,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
 
         callWaiterLbl.setFont(new java.awt.Font("Californian FB", 1, 16)); // NOI18N
         callWaiterLbl.setForeground(new java.awt.Color(255, 255, 255));
-        callWaiterLbl.setText("Call Waiter");
+        callWaiterLbl.setText("Served");
         callWaiterBtn.add(callWaiterLbl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
