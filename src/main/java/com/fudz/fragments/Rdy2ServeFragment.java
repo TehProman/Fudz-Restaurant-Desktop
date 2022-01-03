@@ -37,8 +37,6 @@ public class Rdy2ServeFragment extends RoundedPanel {
         readyTxtLbl = new javax.swing.JLabel();
         showOrdersBtn = new com.fudz.custom.RoundedPanel();
         showOrdersLbl = new javax.swing.JLabel();
-        callWaiterBtn = new com.fudz.custom.RoundedPanel();
-        callWaiterLbl = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(192, 279));
@@ -83,15 +81,6 @@ public class Rdy2ServeFragment extends RoundedPanel {
         showOrdersLbl.setText("Show Orders");
         showOrdersBtn.add(showOrdersLbl);
 
-        callWaiterBtn.setBackground(new java.awt.Color(255, 51, 51));
-        callWaiterBtn.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
-        callWaiterBtn.setCornerRadius(30);
-
-        callWaiterLbl.setFont(new java.awt.Font("Californian FB", 1, 16)); // NOI18N
-        callWaiterLbl.setForeground(new java.awt.Color(255, 255, 255));
-        callWaiterLbl.setText("Served");
-        callWaiterBtn.add(callWaiterLbl);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,8 +90,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(tableLbl)
                     .addComponent(readyTxtLbl)
-                    .addComponent(showOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(callWaiterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(showOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,18 +106,14 @@ public class Rdy2ServeFragment extends RoundedPanel {
                 .addComponent(iconPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(readyTxtLbl)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(showOrdersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(callWaiterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.fudz.custom.RoundedPanel callWaiterBtn;
-    private javax.swing.JLabel callWaiterLbl;
     private javax.swing.JLabel dishIcon;
     private javax.swing.JPanel iconPanel;
     private javax.swing.JLabel numLbl;

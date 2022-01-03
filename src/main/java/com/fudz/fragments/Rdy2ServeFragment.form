@@ -34,7 +34,6 @@
                   <Component id="tableLbl" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="readyTxtLbl" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="showOrdersBtn" alignment="2" min="-2" pref="159" max="-2" attributes="0"/>
-                  <Component id="callWaiterBtn" alignment="2" min="-2" pref="159" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
           </Group>
@@ -54,11 +53,9 @@
               <Component id="iconPanel" min="-2" pref="102" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="readyTxtLbl" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
               <Component id="showOrdersBtn" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="callWaiterBtn" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -151,33 +148,6 @@
               <Color blue="0" green="66" red="87" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Show Orders"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="com.fudz.custom.RoundedPanel" name="callWaiterBtn">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="33" green="33" red="ff" type="rgb"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="callWaiterBtn.setCornerRadius(30);"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-        <Property name="verticalGap" type="int" value="10"/>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="callWaiterLbl">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Californian FB" size="16" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Served"/>
           </Properties>
         </Component>
       </SubComponents>
