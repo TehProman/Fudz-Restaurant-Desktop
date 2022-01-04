@@ -2,22 +2,38 @@ package com.fudz.fragments;
 
 import com.fudz.custom.RoundedPanel;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author Rene Tajos Jr.
  */
 public class Rdy2ServeFragment extends RoundedPanel {
+    
+    private ShowOrdersListener listener;
+    public interface ShowOrdersListener {
+        void onClick();
+    }
 
     /**
      * Creates new form Rdy2ServeFragment
      */
     public Rdy2ServeFragment() {
+        _init();
+        initComponents();
+    }
+    
+    public Rdy2ServeFragment(List<HashMap<String, Object>> ready2ServeLst, ShowOrdersListener _listener) {
+        listener = _listener;
+        _init();
+        initComponents();
+    }
+    
+    private void _init() {
         bgColor = new Color(255,255,255);
         cornerRadius = 25;
         haveBorder = false;
-        
-        initComponents();
     }
 
     /**
@@ -44,7 +60,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
         setName(""); // NOI18N
 
         tableLbl.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 1, 14)); // NOI18N
-        tableLbl.setForeground(new java.awt.Color(135, 102, 0));
+        tableLbl.setForeground(new java.awt.Color(51, 51, 51));
         tableLbl.setText("TABLE");
 
         iconPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -52,7 +68,7 @@ public class Rdy2ServeFragment extends RoundedPanel {
 
         numLbl.setBackground(new java.awt.Color(135, 102, 0));
         numLbl.setFont(new java.awt.Font("Dubai Medium", 1, 48)); // NOI18N
-        numLbl.setForeground(new java.awt.Color(135, 102, 0));
+        numLbl.setForeground(new java.awt.Color(51, 51, 51));
         numLbl.setText("12");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -68,16 +84,21 @@ public class Rdy2ServeFragment extends RoundedPanel {
         iconPanel.add(dishIcon, gridBagConstraints);
 
         readyTxtLbl.setFont(new java.awt.Font("Californian FB", 1, 24)); // NOI18N
-        readyTxtLbl.setForeground(new java.awt.Color(135, 102, 0));
+        readyTxtLbl.setForeground(new java.awt.Color(51, 51, 51));
         readyTxtLbl.setText("Ready");
 
         showOrdersBtn.setBackground(new java.awt.Color(231, 231, 231));
+        showOrdersBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showOrdersBtnMouseClicked(evt);
+            }
+        });
         showOrdersBtn.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
         showOrdersBtn.setCornerRadius(30);
         showOrdersBtn.setBorderColor(new java.awt.Color(218,164,0));
 
         showOrdersLbl.setFont(new java.awt.Font("Californian FB", 1, 16)); // NOI18N
-        showOrdersLbl.setForeground(new java.awt.Color(135, 102, 0));
+        showOrdersLbl.setForeground(new java.awt.Color(51, 51, 51));
         showOrdersLbl.setText("Show Orders");
         showOrdersBtn.add(showOrdersLbl);
 
@@ -111,6 +132,10 @@ public class Rdy2ServeFragment extends RoundedPanel {
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void showOrdersBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showOrdersBtnMouseClicked
+        listener.onClick();
+    }//GEN-LAST:event_showOrdersBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

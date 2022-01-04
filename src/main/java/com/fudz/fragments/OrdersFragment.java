@@ -1,12 +1,16 @@
 package com.fudz.fragments;
 
+import com.fudz.custom.BaseFragment;
 import com.fudz.custom.FudzJList;
+import com.fudz.restau.Fudz;
+import com.google.gson.Gson;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.SoftBevelBorder;
 
@@ -19,8 +23,7 @@ import javax.swing.border.SoftBevelBorder;
  * the orders that the waiters sent
  * from our mobile application
  */
-public class OrdersFragment extends javax.swing.JPanel {
-    
+public class OrdersFragment extends BaseFragment {
     private final Font ordersLst_font = new Font("Californian FB", 1, 14);
     private final Color ordersLst_BgColor = new Color(255,255,255);
     private final Border ordersLst_Border = new SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
@@ -31,12 +34,23 @@ public class OrdersFragment extends javax.swing.JPanel {
     
     private final Color addOnsPanel_BgColor = new Color(255,255,255);
     private final Border addOnsPanel_Border = new SoftBevelBorder(javax.swing.border.BevelBorder.RAISED);
+    
+    private OnCookNowBtnListener listener;
+    public interface OnCookNowBtnListener {
+        void OnClick(int position);
+    }
 
     /**
      * Creates new form OrdersFragment
      */
-    public OrdersFragment() {
+     public OrdersFragment() {
         initComponents();
+     }
+    
+    public OrdersFragment(List<HashMap<String, Object>> ordersList, OnCookNowBtnListener _listener) {
+        
+        initComponents();
+        listener = _listener;
         
         /*
         **
@@ -97,6 +111,19 @@ public class OrdersFragment extends javax.swing.JPanel {
             items2.add(map);
         }
         addOnsList.setData(items2);
+    }
+
+    @Override
+    public void setFragmentPosition(int _pos) {
+        position = _pos;
+    }
+    
+    public HashMap<String, Object> getTableOrders() {
+        HashMap<String, Object> orderMap = new HashMap<>();
+        orderMap.put(Fudz.ORDERS_LIST_KEY, new Gson().toJson(ordersLst.getData()));
+        orderMap.put(Fudz.ADDONS_LIST_KEY, new Gson().toJson(addOnsList.getData()));
+        
+        return orderMap;
     }
 
     /**
@@ -251,6 +278,11 @@ public class OrdersFragment extends javax.swing.JPanel {
         ordersLstPanel.add(addOnsPanel);
 
         cookNowBtn.setBackground(new java.awt.Color(255, 51, 51));
+        cookNowBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cookNowBtnMouseClicked(evt);
+            }
+        });
 
         cookNowLbl.setFont(new java.awt.Font("Californian FB", 1, 18)); // NOI18N
         cookNowLbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -376,6 +408,10 @@ public class OrdersFragment extends javax.swing.JPanel {
             );
         }
     }//GEN-LAST:event_ordersFragmentComponentResized
+
+    private void cookNowBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cookNowBtnMouseClicked
+        listener.OnClick(getPosition());
+    }//GEN-LAST:event_cookNowBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -36,6 +36,9 @@ public class Fudz {
     public static final int MOUSE_LEFT_BTN = 1;
     public static final int MOUSE_RIGHT_BTN = 3;
     
+    public static final String ORDERS_LIST_KEY = "ordersLst";
+    public static final String ADDONS_LIST_KEY = "addonsLst";
+    
     public static final Color mouseEnteredOnMenuTabs_COLOR = new Color(255,214,90);
     public static final Color mouseExitedOnMenuTabs_COLOR = new Color(218,164,0);
     public static final Color mouseClickedOnMenuTabs_COLOR = new Color(252,243,236);

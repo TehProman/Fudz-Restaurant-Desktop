@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author Rene Tajos Jr.
  */
-public class RoundedPanel extends JPanel {
+public class RoundedPanel extends BaseFragment {
     
     protected Color bgColor;
     protected Color borderColor;
@@ -58,5 +58,10 @@ public class RoundedPanel extends JPanel {
             graphics.setColor(borderColor); // set the color for the border
             graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
         }
+    }
+
+    @Override
+    public void setFragmentPosition(int _pos) {
+        position = _pos;
     }
 }

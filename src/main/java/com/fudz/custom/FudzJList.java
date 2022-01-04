@@ -56,4 +56,8 @@ public class FudzJList extends JPanel implements Serializable {
                     .setQty((int)data.get(ITEM_QTY_KEY)));
         });
     }
+    
+    public List<HashMap<String, Object>> getData() {
+        return mData;
+    }
 }

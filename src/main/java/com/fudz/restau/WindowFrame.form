@@ -279,15 +279,15 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="contentPanel">
+            <Container class="com.fudz.custom.GridListView" name="contentPanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ec" green="f3" red="fc" type="rgb"/>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="33" type="rgb"/>
-                </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="contentPanel.setOnContentChangedListener(new GridListView.ContentChangeListener() {&#xa;    @Override&#xa;    public void onContentChanged() {&#xa;        pHolderCount = 0; // always reset the place holder count when content changed.&#xa;        _updateScreen(viewedScrn);&#xa;    }&#xa;});"/>
+              </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="2"/>

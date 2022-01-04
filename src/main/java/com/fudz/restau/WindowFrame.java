@@ -1,16 +1,22 @@
 package com.fudz.restau;
 
 import com.fudz.custom.FudzFrame;
+import com.fudz.custom.FudzJList;
 import com.fudz.custom.FudzToolbar;
+import com.fudz.custom.GridListView;
 import com.fudz.fragments.CookingFragment;
 import com.fudz.fragments.OrdersFragment;
 import com.fudz.fragments.Rdy2ServeFragment;
+import com.google.gson.Gson;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -20,20 +26,37 @@ import javax.swing.JPanel;
  */
 public class WindowFrame extends FudzFrame {
     
+    /* Ang laman ng mainOrdersLst variable
+    * OrdersList: List<HashMap<String, Object>> {
+        map_key = FudzJList.ITEM_NAME_KEY;
+        map_key = FudzJList.ITEM_QTY_KEY;
+    }
+    * AddonsList: List<HashMap<String, Object>> {
+        map_key = FudzJList.ITEM_NAME_KEY;
+        map_key = FudzJList.ITEM_QTY_KEY;
+    }
+    * Bill: float data type;
+    */
+    public static List<HashMap<String, Object>> mainOrderLst = new ArrayList<>(); // main list of orders
+    public static List<HashMap<String, Object>> cookingOrderLst = new ArrayList<>(); // list of all orders that are for cooking
+    public static List<HashMap<String, Object>> ready2ServeLst = new ArrayList<>(); // list of all orders that are already done and are ready to serve.
+    
     private Color menuLabelColor = new Color(183,138,0);
     
     private Database.Server DB;
-    private final String mReference = "Sample";
+    private final String mReference = "Sample"; // database reference
     
-    private int viewedScrn = Fudz.ORDERS_SCREEN;
+    public static int viewedScrn = Fudz.ORDERS_SCREEN;
     
-    private int ordersFragmentPanelWidth = 0;
-    private int ordersFragmentPanelHeight = 0;
+    public static int ordersFragmentPanelWidth = 0;
+    public static int ordersFragmentPanelHeight = 0;
     
     private FudzMouseListener fudzFrameMouseListener;
     private FudzToolbar.FudzToolbarMouseListener fudzToolbarMouseListener;
     
     public static boolean[] isResizingWindowOnDrag = {false, false};
+    
+    public static int columnPHolder = 0, pHolderCount = 0, columnNum = 0;
 
     /**
      * Creates new form NewJFrame
@@ -53,41 +76,10 @@ public class WindowFrame extends FudzFrame {
         
         this.setBounds(300/2, ((int)Fudz.getScreenHeight()-newScreenHeight)/2, newScreenWidth, newScreenHeight);
         
+        _initListeners(); // initialize the listeners
+        _populate();
         new UpdateFragmentsThread().start();
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-        /* * * * * * * * * *
-        * MOUSE LISTENERS
-        * * * * * * * * * */
-        // FRAME MOUSE LISTENER
-        fudzFrameMouseListener = new FudzMouseListener() {
-            @Override
-            public void onPressed() {
-                JPanel fragment = (JPanel)contentPanel.getComponent(0);
-                columnPHolder = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
-            }
-
-            @Override
-            public void onDragged() {
-                // ** updates the fragments column every drag ** \\
-                JPanel fragment = (JPanel)contentPanel.getComponent(0);
-                final int column = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
-                if (column != columnPHolder) {
-                    pHolderCount = 0;
-                    _updateScreen(viewedScrn);
-                }
-                // = = = = = = = = = = = = = = \\
-            }
-        };
-        
-        // TOOLBAR MOUSE LISTENER
-        fudzToolbarMouseListener = (int frameX, int frameY) -> {
-            // onDragged
-            WindowFrame.this.setLocation(frameX, frameY);
-        };
-        
-        // set the listeners
-        this.setFudzMouseListener(fudzFrameMouseListener);
-        fudzToolbar.setFudzToolbarMouseListener(fudzToolbarMouseListener);
     }
 
     /**
@@ -108,7 +100,7 @@ public class WindowFrame extends FudzFrame {
         ready2ServePanel = new javax.swing.JPanel();
         ready_ic = new javax.swing.JLabel();
         contentsScrollPane = new javax.swing.JScrollPane();
-        contentPanel = new javax.swing.JPanel();
+        contentPanel = new com.fudz.custom.GridListView();
         fudzToolbar = new com.fudz.custom.FudzToolbar(this);
         closeWindowBtn = new javax.swing.JLabel();
         maximizeBtn = new javax.swing.JLabel();
@@ -252,8 +244,14 @@ public class WindowFrame extends FudzFrame {
         contentsScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
         contentPanel.setBackground(new java.awt.Color(252, 243, 236));
-        contentPanel.setForeground(new java.awt.Color(51, 51, 51));
         contentPanel.setLayout(new java.awt.GridLayout(3, 2, 10, 20));
+        contentPanel.setOnContentChangedListener(new GridListView.ContentChangeListener() {
+            @Override
+            public void onContentChanged() {
+                pHolderCount = 0; // always reset the place holder count when content changed.
+                _updateScreen(viewedScrn);
+            }
+        });
         contentsScrollPane.setViewportView(contentPanel);
 
         fudzToolbar.setBackground(new java.awt.Color(218, 164, 0));
@@ -540,34 +538,120 @@ public class WindowFrame extends FudzFrame {
     /* * * * * * * * *
     * CUSTOM METHODS
     * * * * * * * * */
+    // ** Listeners ** \\
+    private void _initListeners() {
+        // FRAME MOUSE LISTENER
+        fudzFrameMouseListener = new FudzMouseListener() {
+            @Override
+            public void onPressed() {
+                JPanel fragment = (JPanel)contentPanel.getComponent(0);
+                columnPHolder = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
+            }
+
+            @Override
+            public void onDragged() {
+                // ** updates the fragments column every drag ** \\
+                JPanel fragment = (JPanel)contentPanel.getComponent(0);
+                final int column = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
+                if (column != columnPHolder) {
+                    pHolderCount = 0;
+                    _updateScreen(viewedScrn);
+                }
+                // = = = = = = = = = = = = = = \\
+            }
+        };
+        
+        // TOOLBAR MOUSE LISTENER
+        fudzToolbarMouseListener = (int frameX, int frameY) -> {
+            // onDragged
+            WindowFrame.this.setLocation(frameX, frameY);
+        };
+        
+        // set the listeners for the frame
+        this.setFudzMouseListener(fudzFrameMouseListener);
+        fudzToolbar.setFudzToolbarMouseListener(fudzToolbarMouseListener);
+    }
+    
     // this will update the screen when a certain menu tab is click.
     private void _updateScreen(final int screen) {
         switch (screen) {
             case Fudz.ORDERS_SCREEN:
                 headingLbl.setForeground(new Color(183,138,0));
                 headingLbl.setText("Customer Orders");
-                
-                contentPanel.removeAll();
-                _addOrder();
-                contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
+                // populate the contentPanel with the orders
+                contentPanel.populate(screen, contentsScrollPane, mainOrderLst.size());
+                contentPanel.notifyItemChanged();// always notify the panel about the changes to avoid distorted or not visible graphics
                 break;
             case Fudz.COOKING_SCREEN:
                 headingLbl.setText("Preparing Orders");
-                
-                contentPanel.removeAll();
-                
-                _addCooking();
-                contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
+                // populate the contentPanel with the cooking orders
+                contentPanel.populate(screen, contentsScrollPane, cookingOrderLst.size());
+                contentPanel.notifyItemChanged(); // always notify the panel about the changes to avoid distorted or not visible graphics
                 break;
             case Fudz.RTS_SCREEN:
                 headingLbl.setText("Orders Ready");
-                
-                contentPanel.removeAll();
-                
-                _addReady2Serve();
-                contentPanel.updateUI(); // always update the UI to avoid distorted or not visible graphics
-
+                // populate the contentPanel with the ready to serve orders
+                contentPanel.populate(screen, contentsScrollPane, ready2ServeLst.size());
+                contentPanel.notifyItemChanged();// always notify the panel about the changes to avoid distorted or not visible graphics
                 break;
+        }
+    }
+    
+    // *** This method is just an example, just to populate the list, this will later be removed *** \\
+    public void _populate() {
+        for (int i=0; i<10; i++) {
+            HashMap<String, Object> orders = new HashMap<>();
+            List<HashMap<String, Object>> ordersItems = new ArrayList<>();
+            {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Cheese Burger King");
+                map.put(FudzJList.ITEM_QTY_KEY, 3);
+                ordersItems.add(map);
+
+                map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Spaghetti");
+                map.put(FudzJList.ITEM_QTY_KEY, 2);
+                ordersItems.add(map);
+
+                map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Mammon");
+                map.put(FudzJList.ITEM_QTY_KEY, 5);
+                ordersItems.add(map);
+
+                map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Fried Chicken");
+                map.put(FudzJList.ITEM_QTY_KEY, 5);
+                ordersItems.add(map);
+            }
+
+            List<HashMap<String, Object>> addOnsItems = new ArrayList<>();
+            {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Cheese Burger King");
+                map.put(FudzJList.ITEM_QTY_KEY, 3);
+                addOnsItems.add(map);
+
+                map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Spaghetti");
+                map.put(FudzJList.ITEM_QTY_KEY, 2);
+                addOnsItems.add(map);
+
+                map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Mammon");
+                map.put(FudzJList.ITEM_QTY_KEY, 5);
+                addOnsItems.add(map);
+
+                map = new HashMap<>();
+                map.put(FudzJList.ITEM_NAME_KEY, "Fried Chicken");
+                map.put(FudzJList.ITEM_QTY_KEY, 5);
+                addOnsItems.add(map);
+            }
+
+            orders.put(Fudz.ORDERS_LIST_KEY, new Gson().toJson(ordersItems));
+            orders.put(Fudz.ADDONS_LIST_KEY, new Gson().toJson(addOnsItems));
+            orders.put("Bill", new Gson().toJson(0));
+
+            mainOrderLst.add(orders);
         }
     }
     
@@ -599,116 +683,6 @@ public class WindowFrame extends FudzFrame {
                 ready_ic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/waiter_yellow_25px.png")));
                 break;
         }
-    }
-    
-    private int columnPHolder = 0;
-    
-    private void _resetGridLayout(Component comp, int size, int column) {
-        int row; float remainder;
-        
-        row = size / column;
-        remainder = size % column;
-
-        ((JPanel)comp).setLayout(new GridLayout(remainder!=0.0?row + 1:row, column, 5, 10));
-    }
-    
-    public static int pHolderCount = 0, columnNum = 0;
-    private void _addFragment(final JPanel pContentPanel, JPanel _fragment) {
-        final JPanel fragment = _fragment;
-        final int column = Fudz.getColumn(contentsScrollPane.getWidth(), fragment.getPreferredSize().width);
-        
-        columnNum = column; columnPHolder = column;
-        int childrensCount = pContentPanel.getComponentCount() + 1;
-        // when the screen is on ORDERS
-        if (viewedScrn == Fudz.ORDERS_SCREEN) {
-            
-            _initFragments(fragment, childrensCount, column);
-
-            if (ordersFragmentPanelWidth == 0)
-                ordersFragmentPanelWidth = fragment.getPreferredSize().width;
-            if (ordersFragmentPanelHeight == 0)
-                ordersFragmentPanelHeight = fragment.getPreferredSize().height;
-            
-            // when the screen is on COOKING
-        } else if (viewedScrn == Fudz.COOKING_SCREEN) {
-            _initFragments(fragment, childrensCount, column);
-        } else {
-            _initFragments(fragment, childrensCount, column);
-        }
-    }
-    
-    private void _initFragments(final JPanel fragment, final int _childrensCount, final int column) {
-            int childrensCount = _childrensCount;
-            // if the ordersFragmentPanel children count is less than or equal 2
-            // then, set its layout manager first to flow layout to avoid fragment stretching effect.
-            if (childrensCount-pHolderCount <= column) {
-                contentPanel.setLayout(new FlowLayout());
-                contentPanel.add(fragment);
-                return;
-            }
-            // else
-            
-            if (pHolderCount > 0) {
-                childrensCount -= pHolderCount;
-                contentPanel.remove(contentPanel.getComponentCount()-1);
-                pHolderCount--;
-            }
-            
-            int absChildCount = contentPanel.getComponentCount()-pHolderCount;
-            _resetGridLayout(contentPanel, childrensCount, column);
-            contentPanel.add(fragment, pHolderCount!=0? absChildCount : contentPanel.getComponentCount()-1);
-            
-            if (pHolderCount > 0) // always return if there's already a place holder
-                return;
-            
-            // this will fix or add placeholders to avoid stretching effect.
-            Fudz.fixGridLayout(contentPanel, viewedScrn, _pHolderCount(column));
-    }
-    
-    private int _pHolderCount(final int column) {
-        while (columnNum < contentPanel.getComponentCount())
-            columnNum += column;
-            
-        return pHolderCount = columnNum - contentPanel.getComponentCount(); // how many place holder to add
-    }
-    
-    /*
-    * THIS METHOD IS FOR TESTING AND TO BE REMOVED LATER.
-    */
-    private void _addOrder() {
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-        _addFragment(contentPanel, new OrdersFragment());
-    }
-    
-    private void _addCooking() {
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-        _addFragment(contentPanel, new CookingFragment());
-    }
-    
-    private void _addReady2Serve() {
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
-        _addFragment(contentPanel, new Rdy2ServeFragment());
     }
     
     /*
@@ -765,7 +739,7 @@ public class WindowFrame extends FudzFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel closeWindowBtn;
-    private javax.swing.JPanel contentPanel;
+    private com.fudz.custom.GridListView contentPanel;
     private javax.swing.JScrollPane contentsScrollPane;
     private javax.swing.JPanel cookingPanel;
     private javax.swing.JLabel cooking_ic;
