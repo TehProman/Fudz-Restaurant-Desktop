@@ -27,7 +27,7 @@ import javax.swing.JScrollPane;
 
 /**
  *
- * @author Lenovo
+ * @author Rene Tajos Jr.
  */
 public class GridListView extends JPanel {
     
