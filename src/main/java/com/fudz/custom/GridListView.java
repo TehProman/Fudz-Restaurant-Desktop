@@ -162,9 +162,9 @@ public class GridListView extends JPanel {
             Fudz.fixGridLayout(this, viewedScrn, _pHolderCount(column));
     }
     
-    private int _pHolderCount(final int column) {
+    private int _pHolderCount(final int _column) {
         while (columnNum < this.getComponentCount())
-            columnNum += column;
+            columnNum += _column;
             
         return pHolderCount = columnNum - this.getComponentCount(); // how many place holder to add
     }
