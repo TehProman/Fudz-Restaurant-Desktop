@@ -4,6 +4,6 @@
 ## Orders - Screen Design
 ![alt text](https://i.ibb.co/q5MtdjZ/Untitled2.png)
 ## Cooking - Screen Design
-![alt text](https://i.ibb.co/gwfLHLn/Untitled3.png)
+![alt text](https://i.ibb.co/8r7FJFn/Untitled.png)
 ## Ready To Serve - Screen Design
-![alt text](https://i.ibb.co/YLB5ng4/Untitle4.png)
+![alt text](https://i.ibb.co/7QZmczy/Untitled2.png)
