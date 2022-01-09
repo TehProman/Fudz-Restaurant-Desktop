@@ -32,7 +32,7 @@ import javax.swing.JScrollPane;
 public class GridListView extends JPanel {
     
     private JScrollPane contentScrollPaneReference;
-    private int unchangedSize;
+    private int UnchangedSize;
     
     private ContentChangeListener listener;
     public interface ContentChangeListener {
@@ -58,7 +58,7 @@ public class GridListView extends JPanel {
         if (contentScrollPaneReference == null)
             contentScrollPaneReference = _contentScrollPane;
         
-        unchangedSize = _size;
+        UnchangedSize = _size;
         this.removeAll();
         
         switch (screen) {
@@ -108,7 +108,7 @@ public class GridListView extends JPanel {
     
     private void _initialize( int _size, BaseFragment _fragment) {
         final BaseFragment fragment = _fragment;
-        fragment.setFragmentPosition(unchangedSize - _size);
+        fragment.setFragmentPosition(UnchangedSize - _size);
         Fudz.log(fragment.getPosition());
         final int column = Fudz.getColumn(contentScrollPaneReference.getWidth(), fragment.getPreferredSize().width);
 
